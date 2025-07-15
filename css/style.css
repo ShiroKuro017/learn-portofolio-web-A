@@ -1,0 +1,75 @@
+/* Menggunakan font Indie Flower sebagai default */
+body {
+    font-family: 'Inconsolata', monospace;
+    background-color: #0c0a09; 
+    position: relative;
+    overflow-x: hidden;
+    
+    /* Tambahan untuk memperbaiki "floating footer" */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Tambahan untuk membuat konten utama mengisi ruang yang tersedia */
+main {
+    flex-grow: 1;
+}
+
+/* ===== BACKGROUND MASONRY GALLERY ===== */
+#background-gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+#background-gallery::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Lapisan gelap dibuat sedikit lebih pekat untuk keterbacaan */
+    background: radial-gradient(circle, rgba(12, 10, 9, 0.4) 0%, rgba(12, 10, 9, 0.8) 100%);
+    z-index: 0.1; 
+}
+
+/* Wrapper untuk setiap gambar untuk menangani posisi */
+.gallery-item {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.gallery-item.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.5;
+    filter: grayscale(20%);
+}
+
+/* Header & Footer */
+.sticky-header, footer {
+    background-color: #191919; /* Warna abu-abu gelap solid */
+    border-color: #333;
+}
+
+footer {
+    border-top: 1px solid #333;
+}
