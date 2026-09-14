@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JUDUL DIUBAH -->
+    <title>Drawing & Illustration Gallery - ShirO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- CSS tambahan khusus untuk halaman galeri ini -->
+    <style>
+        .masonry-gallery {
+            column-count: 4; /* 4 kolom di desktop */
+            column-gap: 1rem;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem; /* Sudut lebih bulat */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Menambahkan cursor pointer saat di-hover */
+        }
+
+        .masonry-item:hover {
+            transform: translateY(-5px); /* Efek mengangkat saat di-hover */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Penyesuaian untuk layar lebih kecil (Responsif) */
+        @media (max-width: 1024px) {
+            .masonry-gallery { column-count: 3; }
+        }
+        @media (max-width: 768px) {
+            .masonry-gallery { column-count: 2; }
+        }
+        @media (max-width: 640px) {
+            .masonry-gallery { column-count: 1; }
+        }
+
+        /* Gaya untuk Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: 1rem;
+        }
+
+        .lightbox-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* PERUBAHAN: Kontainer untuk gambar dan caption */
+        .lightbox-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 95vw;
+            max-height: 95vh;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-modal.show .lightbox-container {
+            transform: scale(1);
+        }
+
+        .lightbox-content {
+            max-width: 100%;
+            max-height: calc(95vh - 80px); /* Tinggi maksimal gambar, menyisakan ruang untuk caption */
+            border-radius: 0.25rem;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #bbb;
+        }
+
+        /* GAYA DIPERBARUI: Untuk teks pemberitahuan di lightbox */
+        .lightbox-caption {
+            color: #ccc;
+            margin-top: 1rem; /* Jarak dari gambar */
+            font-size: 16px;
+            /* Menggunakan font yang lebih standar untuk keterbacaan */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+    <header class="sticky top-0 z-50 w-full sticky-header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">ShirO/Emha Wira</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="hover:text-white">Home</a>
+                <a href="tentang.html" class="hover:text-white">About Me</a>
+                <a href="portofolio.html" class="hover:text-white">Portofolio</a>
+                <a href="layanan.html" class="hover:text-white">commission</a>
+                <a href="kontak.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="md:hidden"><i data-lucide="menu" class="text-white"></i></div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+            <!-- TEKS DIUBAH -->
+            <h1 class="text-4xl md:text-5xl font-bold text-white">Drawing & Illustration Gallery</h1>
+            <p class="text-lg text-gray-400 mt-4">A collection of digital drawings and illustrations.</p>
+        </div>
+
+        <!-- Kontainer ini akan menggunakan gaya .masonry-gallery dari CSS di atas -->
+        <div class="masonry-gallery">
+            <!-- Gambar akan ditambahkan oleh JavaScript ke sini -->
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 ShirO/Emha Wira. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript disederhanakan untuk hanya menambahkan gambar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi ikon
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            const galleryContainer = document.querySelector('.masonry-gallery');
+            if (!galleryContainer) return;
+
+            // DAFTAR GAMBAR DIUBAH
+            const images = [];
+            for (let i = 1; i <= 16; i++) {
+                images.push(`images/Gambar/karya-${i}.jpg`);
+            }
+            
+            // Loop untuk membuat elemen gambar dan menambahkannya ke galeri
+            images.forEach(src => {
+                const item = document.createElement('div');
+                item.className = 'masonry-item';
+                
+                const img = document.createElement('img');
+                img.src = src;
+                img.loading = 'lazy'; 
+                img.onerror = () => { item.style.display = 'none'; }; 
+
+                // Menambahkan event listener untuk membuka lightbox saat gambar diklik
+                item.addEventListener('click', () => {
+                    openLightbox(src);
+                });
+
+                item.appendChild(img);
+                galleryContainer.appendChild(item);
+            });
+
+            // --- FUNGSI UNTUK LIGHTBOX ---
+            function openLightbox(src) {
+                const modal = document.createElement('div');
+                modal.className = 'lightbox-modal';
+                
+                const closeBtn = document.createElement('span');
+                closeBtn.className = 'lightbox-close';
+                closeBtn.innerHTML = '&times;';
+                
+                const container = document.createElement('div');
+                container.className = 'lightbox-container';
+
+                const modalImg = document.createElement('img');
+                modalImg.className = 'lightbox-content';
+                modalImg.src = src;
+
+                const caption = document.createElement('div');
+                caption.className = 'lightbox-caption';
+                caption.textContent = 'Press ESC or click outside the image to exit.';
+
+                container.appendChild(modalImg);
+                container.appendChild(caption);
+
+                modal.appendChild(closeBtn);
+                modal.appendChild(container); 
+                document.body.appendChild(modal);
+
+                const closeModal = () => {
+                    modal.classList.remove('show');
+                    window.removeEventListener('keydown', handleEsc);
+                    setTimeout(() => {
+                        if (document.body.contains(modal)) {
+                            document.body.removeChild(modal);
+                        }
+                    }, 300);
+                };
+
+                const handleEsc = (event) => {
+                    if (event.key === 'Escape') {
+                        closeModal();
+                    }
+                };
+
+                closeBtn.onclick = closeModal;
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+                window.addEventListener('keydown', handleEsc);
+
+                setTimeout(() => modal.classList.add('show'), 10);
+            }
+        });
+    </script>
+</body>
+</html>

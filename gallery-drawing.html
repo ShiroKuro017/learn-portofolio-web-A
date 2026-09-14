@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- JUDUL DIUBAH -->
-    <title>Drawing & Illustration Gallery - ShirO</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Drawing & Illustration Gallery - ShirO / Emha Wira">
+    <title>Drawing &amp; Illustration Gallery - ShirO / Emha Wira</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inconsolata', 'monospace'],
+                        mono: ['Inconsolata', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- CSS tambahan khusus untuk halaman galeri ini -->
     <style>
         .masonry-gallery {
-            column-count: 4; /* 4 kolom di desktop */
+            column-count: 4;
             column-gap: 1rem;
         }
 
         .masonry-item {
             break-inside: avoid;
             margin-bottom: 1rem;
-            border-radius: 0.75rem; /* Sudut lebih bulat */
+            border-radius: 0.75rem;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; /* Menambahkan cursor pointer saat di-hover */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #111827;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
         }
 
         .masonry-item:hover {
-            transform: translateY(-5px); /* Efek mengangkat saat di-hover */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .masonry-item img {
@@ -39,7 +55,6 @@
             display: block;
         }
 
-        /* Penyesuaian untuk layar lebih kecil (Responsif) */
         @media (max-width: 1024px) {
             .masonry-gallery { column-count: 3; }
         }
@@ -50,7 +65,7 @@
             .masonry-gallery { column-count: 1; }
         }
 
-        /* Gaya untuk Lightbox Modal */
+        /* Lightbox Modal - Lightweight & Hardware Accelerated */
         .lightbox-modal {
             position: fixed;
             z-index: 1000;
@@ -64,8 +79,9 @@
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
             padding: 1rem;
+            will-change: opacity, visibility;
         }
 
         .lightbox-modal.show {
@@ -73,7 +89,6 @@
             visibility: visible;
         }
 
-        /* PERUBAHAN: Kontainer untuk gambar dan caption */
         .lightbox-container {
             display: flex;
             flex-direction: column;
@@ -81,8 +96,9 @@
             text-align: center;
             max-width: 95vw;
             max-height: 95vh;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+            will-change: transform;
         }
 
         .lightbox-modal.show .lightbox-container {
@@ -91,8 +107,8 @@
 
         .lightbox-content {
             max-width: 100%;
-            max-height: calc(95vh - 80px); /* Tinggi maksimal gambar, menyisakan ruang untuk caption */
-            border-radius: 0.25rem;
+            max-height: calc(95vh - 80px);
+            border-radius: 0.375rem;
         }
         
         .lightbox-close {
@@ -100,65 +116,102 @@
             top: 20px;
             right: 35px;
             color: #fff;
-            font-size: 40px;
-            font-weight: bold;
+            font-size: 36px;
+            font-weight: 300;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .lightbox-close:hover {
-            color: #bbb;
+            color: #9ca3af;
         }
 
-        /* GAYA DIPERBARUI: Untuk teks pemberitahuan di lightbox */
         .lightbox-caption {
-            color: #ccc;
-            margin-top: 1rem; /* Jarak dari gambar */
-            font-size: 16px;
-            /* Menggunakan font yang lebih standar untuk keterbacaan */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #9ca3af;
+            margin-top: 1rem;
+            font-size: 14px;
+            font-family: 'Inconsolata', monospace;
         }
     </style>
+    <script src="js/script.js" defer></script>
 </head>
-<body class="text-gray-300">
+<body class="text-gray-300 min-h-screen flex flex-col">
 
-    <header class="sticky top-0 z-50 w-full sticky-header">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-white">ShirO/Emha Wira</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="hover:text-white">Home</a>
-                <a href="tentang.html" class="hover:text-white">About Me</a>
-                <a href="portofolio.html" class="hover:text-white">Portofolio</a>
-                <a href="layanan.html" class="hover:text-white">commission</a>
-                <a href="kontak.html" class="hover:text-white">Contact</a>
+    <!-- ===================== HEADER ===================== -->
+    <header class="w-full sticky-header">
+        <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center relative">
+            <a href="index.html" class="text-xl font-bold text-white tracking-tight">ShirO<span class="slash-accent">/</span>Emha Wira</a>
+
+                                    <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="hover:text-white text-sm transition-colors w-20 text-center inline-block" data-i18n-en="About" data-i18n-id="Tentang">About</a>
+                <a href="index.html#work" class="hover:text-white text-sm transition-colors text-white font-semibold w-16 text-center inline-block" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
+                <a href="index.html#experience" class="hover:text-white text-sm transition-colors w-28 text-center inline-block" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
+                <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center justify-center gap-2 cursor-pointer select-none py-1 hover:opacity-80 transition-opacity w-14" aria-label="Toggle language">
+                    <span class="lang-en-span text-white font-bold">EN</span>
+                    <span class="text-gray-600 font-light">/</span>
+                    <span class="lang-id-span text-gray-500 font-normal hover:text-gray-300">ID</span>
+                </div>
+                <a href="index.html#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center w-[148px] shrink-0" data-i18n-en="Contact Me ↗" data-i18n-id="Hubungi Saya ↗">Contact Me ↗</a>
             </div>
-            <div class="md:hidden"><i data-lucide="menu" class="text-white"></i></div>
+
+            <button id="menu-toggle" class="md:hidden text-white p-1" aria-label="Open menu">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+
+            <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
+                <a href="index.html#about" data-i18n-en="About" data-i18n-id="Tentang">About</a>
+                <a href="index.html#work" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
+                <a href="index.html#experience" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
+                <a href="index.html#contact" data-i18n-en="Contact" data-i18n-id="Kontak">Contact</a>
+                <div class="pt-3 flex justify-center">
+                    <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center gap-2 cursor-pointer select-none py-1" aria-label="Toggle language">
+                        <span class="lang-en-span text-white font-bold">EN</span>
+                        <span class="text-gray-600 font-light">/</span>
+                        <span class="lang-id-span text-gray-500 font-normal">ID</span>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-6 py-24">
-        <div class="text-center mb-16">
-            <!-- TEKS DIUBAH -->
-            <h1 class="text-4xl md:text-5xl font-bold text-white">Drawing & Illustration Gallery</h1>
-            <p class="text-lg text-gray-400 mt-4">A collection of digital drawings and illustrations.</p>
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-12 w-full">
+        <!-- Back Navigation -->
+        <div class="mb-8">
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-white transition-colors group" data-i18n-en="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Back to Selected Work" data-i18n-id="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Kembali ke Karya Pilihan">
+                <span class="group-hover:-translate-x-1 transition-transform">←</span> Back to Selected Work
+            </a>
         </div>
 
-        <!-- Kontainer ini akan menggunakan gaya .masonry-gallery dari CSS di atas -->
+        <!-- Section Title Banner matching zul-redesign -->
+        <div class="mb-12 border-b border-gray-800 pb-8">
+            <p class="section-label mb-2" data-i18n-en="02.2 / ILLUSTRATION GALLERY" data-i18n-id="02.2 / GALERI ILUSTRASI">02.2 / ILLUSTRATION GALLERY</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4" data-i18n-en="Drawing &amp; Illustration" data-i18n-id="Gambar &amp; Ilustrasi">
+                Drawing &amp; Illustration
+            </h1>
+            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed" data-i18n-en="A collection of anime-style concept art, character portraits, digital drawings, and creative illustrations." data-i18n-id="Kumpulan seni konsep bergaya anime, potret karakter, gambar digital, dan ilustrasi kreatif.">
+                A collection of anime-style concept art, character portraits, digital drawings, and creative illustrations.
+            </p>
+        </div>
+
+        <!-- Masonry Grid -->
         <div class="masonry-gallery">
-            <!-- Gambar akan ditambahkan oleh JavaScript ke sini -->
+            <!-- Populated via JavaScript -->
         </div>
     </main>
 
-    <footer class="border-t border-gray-800">
-        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
-            <p>&copy; 2025 ShirO/Emha Wira. All Rights Reserved.</p>
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="max-w-6xl mx-auto px-6 py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
+            <p data-i18n-en="© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved." data-i18n-id="© 2026 ShirO / Muhammad Wira Widhana. Hak Cipta Dilindungi.">© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
+            <a href="index.html#work" class="hover:text-white transition-colors flex items-center gap-1" data-i18n-en="← Back to Selected Work" data-i18n-id="← Kembali ke Karya Pilihan">
+                ← Back to Selected Work
+            </a>
         </div>
     </footer>
 
-    <!-- JavaScript disederhanakan untuk hanya menambahkan gambar -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Inisialisasi ikon
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
@@ -166,13 +219,11 @@
             const galleryContainer = document.querySelector('.masonry-gallery');
             if (!galleryContainer) return;
 
-            // DAFTAR GAMBAR DIUBAH
             const images = [];
             for (let i = 1; i <= 16; i++) {
                 images.push(`images/Gambar/karya-${i}.jpg`);
             }
-            
-            // Loop untuk membuat elemen gambar dan menambahkannya ke galeri
+
             images.forEach(src => {
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
@@ -182,7 +233,6 @@
                 img.loading = 'lazy'; 
                 img.onerror = () => { item.style.display = 'none'; }; 
 
-                // Menambahkan event listener untuk membuka lightbox saat gambar diklik
                 item.addEventListener('click', () => {
                     openLightbox(src);
                 });
@@ -191,7 +241,6 @@
                 galleryContainer.appendChild(item);
             });
 
-            // --- FUNGSI UNTUK LIGHTBOX ---
             function openLightbox(src) {
                 const modal = document.createElement('div');
                 modal.className = 'lightbox-modal';
@@ -209,13 +258,14 @@
 
                 const caption = document.createElement('div');
                 caption.className = 'lightbox-caption';
-                caption.textContent = 'Press ESC or click outside the image to exit.';
+                const isId = (localStorage.getItem('lang') === 'id');
+                caption.textContent = isId ? 'Tekan ESC atau klik di luar gambar untuk keluar.' : 'Press ESC or click outside the image to exit.';
 
                 container.appendChild(modalImg);
                 container.appendChild(caption);
 
                 modal.appendChild(closeBtn);
-                modal.appendChild(container); 
+                modal.appendChild(container);
                 document.body.appendChild(modal);
 
                 const closeModal = () => {

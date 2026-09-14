@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Multimedia Generalist</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="text-gray-300">
+
+    <!-- Kontainer Latar Belakang - Mengisi seluruh halaman -->
+    <div id="background-gallery"></div>
+
+    <header class="sticky top-0 z-50 w-full sticky-header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">ShirO/Emha Wira</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#beranda" class="hover:text-white">Home</a>
+                <a href="tentang.html" class="hover:text-white">About Me</a>
+                <a href="portofolio.html" class="hover:text-white">Portofolio</a>
+                <a href="layanan.html" class="hover:text-white">commission</a>
+                <a href="kontak.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="md:hidden"><i data-lucide="menu" class="text-white"></i></div>
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+        <!-- Bagian Hero -->
+        <section id="beranda" class="min-h-screen flex flex-col justify-center items-center text-center container mx-auto px-6">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white">ShirO/Emha Wira</h1>
+                <p class="text-xl md:text-2xl text-gray-400 mt-4 mb-8">A 2D/3D Generalist, and Multimedia Generalist, focusing on 3D assets, and 2D illustration </p>
+                <a href="#portofolio" class="bg-gray-700 text-white font-semibold px-8 py-3 rounded-full hover:bg-gray-600">See Portofolio</a>
+            </div>
+        </section>
+
+        <!-- Wrapper untuk konten selanjutnya -->
+        <div class="container mx-auto px-6">
+            <!-- BAGIAN TENTANG SAYA -->
+            <section id="tentang" class="py-20 md:py-32">
+                <div class="bg-gray-900/80 backdrop-blur-sm rounded-lg p-8 md:p-12">
+                    <div class="grid md:grid-cols-5 gap-12 items-center">
+                        <div class="md:col-span-1">
+                            <img src="images/foto-profil.png" alt="Foto Profil" class="rounded-lg shadow-2xl w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x500/1f2937/ffffff?text=Foto+Anda';">
+                        </div>
+                        <div class="md:col-span-3">
+                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">About Me</h2>
+                            <p class="mb-4 text-lg text-gray-400">Hello, My name is Emha Wira, also known as ShirO. I am a 2D/3D Generalist and Multimedia Generalist with a focus on 3D assets and 2D illustration character portraits with an anime style.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BAGIAN PORTOFOLIO KARYA -->
+            <section id="portofolio" class="py-20 md:py-32">
+                <div class="bg-gray-900/80 backdrop-blur-sm rounded-lg p-8 md:p-12">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Portofolio</h2>
+                        <p class="text-lg max-w-2xl mx-auto mt-4 text-gray-400">Explore my works by category. Click to view the complete gallery.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <a href="gallery-3d.html" class="block bg-gray-800/90 rounded-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                            <img src="images/3D/karya-36.jpg" alt="Karya 3D" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Karya+3D';">
+                            <div class="p-6"><h3 class="text-xl font-bold text-white">3D Rendering</h3></div>
+                        </a>
+                        <a href="gallery-drawing.html" class="block bg-gray-800/90 rounded-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                            <img src="images/Gambar/karya-12.jpg" alt="Karya Gambar" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Karya+Gambar';">
+                            <div class="p-6"><h3 class="text-xl font-bold text-white">Drawing & Ilustrasi</h3></div>
+                        </a>
+                        <a href="gallery-video.html" class="block bg-gray-800/90 rounded-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                            <img src="images/Video/placeholder.jpg" alt="Proyek Video" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1f2937/ffffff?text=Video';">
+                            <div class="p-6"><h3 class="text-xl font-bold text-white">Video Project</h3></div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- BAGIAN KONTAK -->
+            <section id="kontak" class="py-20 md:py-32 text-center">
+                <div class="bg-gray-900/80 backdrop-blur-sm rounded-lg p-8 md:p-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Want to Work With Me?</h2>
+                    <p class="text-lg max-w-2xl mx-auto mt-4 mb-8 text-gray-400">Feel free to contact me.</p>
+                    <a href="kontak.html" class="inline-block bg-gray-700 text-white font-semibold px-8 py-4 rounded-lg hover:bg-gray-600">Contact Me</a>
+                </div>
+                <div class="text-center mt-12">
+                    <h3 class="text-2xl font-bold text-white mb-6">Find me on social media</h3>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://www.instagram.com/emhawira_/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="Instagram"><i data-lucide="instagram" class="h-8 w-8"></i></a>
+                        <a href="https://www.linkedin.com/in/muhammad-wira-widhana" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="LinkedIn"><i data-lucide="linkedin" class="h-8 w-8"></i></a>
+                        <a href="https://www.youtube.com/@emhawira17" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="YouTube"><i data-lucide="youtube" class="h-8 w-8"></i></a>
+                        <a href="https://x.com/emhawira_" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="X/Twitter"><i data-lucide="twitter" class="h-8 w-8"></i></a>
+                        <a href="https://www.artstation.com/shiro17" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="ArtStation"><i data-lucide="paintbrush" class="h-8 w-8"></i></a>
+                    </div>                
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-800 relative z-10">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 ShirO/Emha Wira. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
