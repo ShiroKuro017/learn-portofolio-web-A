@@ -2,11 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 function parseFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return { description: content.trim() };
+  if (!content) return {};
+  const cleanContent = content.replace(/^\uFEFF/, '').trimStart();
+  const match = cleanContent.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) return { description: cleanContent.trim() };
   
   const yaml = match[1];
-  const body = content.slice(match[0].length).trim();
+  const body = cleanContent.slice(match[0].length).trim();
   const data = {};
   
   const lines = yaml.split(/\r?\n/);
@@ -77,6 +79,21 @@ module.exports = (req, res) => {
       } else {
         const parsed = parseFrontmatter(fileContent);
         parsed.slug = filename.replace(/\.md$/, '');
+
+        // Smart image fallback if missing
+        if (!parsed.image && /^(pic|art|3d|video)/.test(parsed.slug)) {
+          const folderMap = { photo: 'Photography', '2d': 'Gambar', '3d': '3D', video: 'Video' };
+          const ext = type === '3d' ? 'png' : 'jpg';
+          parsed.image = `images/${folderMap[type] || 'Photography'}/${parsed.slug}.${ext}`;
+        } else if (parsed.image) {
+          const cleanPath = parsed.image.replace(/^\//, '');
+          const rootPath = path.join(process.cwd(), cleanPath);
+          const nestedPath = path.join(process.cwd(), 'content', type, cleanPath);
+          if (!fs.existsSync(rootPath) && fs.existsSync(nestedPath)) {
+            parsed.image = `content/${type}/${cleanPath}`;
+          }
+        }
+
         items.push(parsed);
       }
     });
