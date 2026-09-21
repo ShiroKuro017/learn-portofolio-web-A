@@ -1,7 +1,7 @@
 ---
 title: GFX Poster Denia Wuwa
 category: Graphic Design
-image: images/denia-malas.png
+image: images/denia-malas.jpg
 description: >-
   ダーニャ 
 
