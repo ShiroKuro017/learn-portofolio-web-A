@@ -30,9 +30,9 @@
       const QUALITY = 0.90; // Visually lossless 90% high quality
 
       function getIndonesiaDateFilename() {
-        const hash = window.location.hash || '';
-        let prefix = 'art';
-        if (hash.includes('2d')) prefix = '2d';
+        const hash = (window.location.hash || '').toLowerCase();
+        let prefix = 'pic';
+        if (hash.includes('2d') || hash.includes('art') || hash.includes('gambar')) prefix = 'art';
         else if (hash.includes('3d')) prefix = '3d';
         else if (hash.includes('video')) prefix = 'video';
         else if (hash.includes('photo') || hash.includes('pic')) prefix = 'pic';
@@ -44,7 +44,8 @@
         const dateStr = `${dd}-${mm}-${yyyy}`;
 
         const storageKey = `upload_${prefix}_${dateStr}`;
-        let defaultInitial = (prefix === 'pic' && dateStr === '21-09-2026') ? 4 : 0;
+        // Prefix pic already has 19 photos for 21-09-2026
+        let defaultInitial = (prefix === 'pic' && dateStr === '21-09-2026') ? 19 : 0;
         let count = parseInt(localStorage.getItem(storageKey) || defaultInitial.toString(), 10);
         count += 1;
         localStorage.setItem(storageKey, count.toString());
@@ -61,7 +62,7 @@
       }
 
       async function processAndCompressImage(file) {
-        if (!file.type.startsWith('image/')) {
+        if (!file.type.startsWith('image/') || file.type === 'image/svg+xml' || file.type === 'image/gif') {
           return file;
         }
 
@@ -95,32 +96,96 @@
                     type: 'image/jpeg',
                     lastModified: Date.now()
                   });
-                  console.log(`[AutoProcess] ${file.name} -> ${newFileName} (${(finalFile.size/1024).toFixed(1)}KB)`);
+                  console.log(`[AutoProcess] ${file.name} -> ${newFileName} (${(finalFile.size / 1024).toFixed(1)} KB)`);
                   resolve(finalFile);
                 } else {
                   resolve(new File([file], newFileName, { type: file.type }));
                 }
               }, 'image/jpeg', QUALITY);
             };
+            img.onerror = function() {
+              resolve(new File([file], newFileName, { type: file.type }));
+            };
             img.src = e.target.result;
+          };
+          reader.onerror = function() {
+            resolve(file);
           };
           reader.readAsDataURL(file);
         });
       }
 
-      // Intercept file input change events in Decap CMS UI
-      document.addEventListener('change', async function(e) {
-        if (e.target && e.target.type === 'file' && e.target.files && e.target.files.length) {
-          const originalFile = e.target.files[0];
-          if (originalFile && originalFile.type.startsWith('image/')) {
-            const processed = await processAndCompressImage(originalFile);
-            if (processed) {
-              const dataTransfer = new DataTransfer();
-              dataTransfer.items.add(processed);
-              e.target.files = dataTransfer.files;
-              e.target.dispatchEvent(new Event('input', { bubbles: true }));
-            }
+      // Synchronously intercept file input change events before React handles them
+      window.addEventListener('change', async function(e) {
+        const target = e.target;
+        if (!target || target.type !== 'file' || !target.files || !target.files.length) {
+          return;
+        }
+
+        // If already processed, let React receive the event
+        if (target.dataset.processed === 'true') {
+          delete target.dataset.processed;
+          return;
+        }
+
+        const originalFiles = Array.from(target.files);
+        const hasImage = originalFiles.some(f => f.type.startsWith('image/'));
+        if (!hasImage) {
+          return;
+        }
+
+        // Stop the raw event synchronously before React captures the original file
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
+
+        try {
+          const dt = new DataTransfer();
+          for (const f of originalFiles) {
+            const processed = await processAndCompressImage(f);
+            dt.items.add(processed);
           }
+
+          target.dataset.processed = 'true';
+          target.files = dt.files;
+
+          // Dispatch synthetic event with the processed files
+          target.dispatchEvent(new Event('change', { bubbles: true }));
+        } catch (err) {
+          console.error('Failed to process image:', err);
+        }
+      }, true); // Use capture phase
+
+      // Intercept drag and drop file uploads
+      window.addEventListener('drop', async function(e) {
+        if (e._isProcessedDrop) return;
+        if (!e.dataTransfer || !e.dataTransfer.files || !e.dataTransfer.files.length) return;
+
+        const files = Array.from(e.dataTransfer.files);
+        const hasImage = files.some(f => f.type.startsWith('image/'));
+        if (!hasImage) return;
+
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
+
+        const dropTarget = e.target;
+        try {
+          const dt = new DataTransfer();
+          for (const f of files) {
+            const processed = await processAndCompressImage(f);
+            dt.items.add(processed);
+          }
+
+          const dropEvent = new DragEvent('drop', {
+            bubbles: true,
+            cancelable: true,
+            dataTransfer: dt
+          });
+          dropEvent._isProcessedDrop = true;
+          dropTarget.dispatchEvent(dropEvent);
+        } catch (err) {
+          console.error('Failed to process dropped image:', err);
         }
       }, true);
     })();

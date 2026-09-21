@@ -16,8 +16,8 @@ collections:
     folder: "content/3d"
     create: true
     slug: "{{slug}}"
-    media_folder: "images/3D"
-    public_folder: "images/3D"
+    media_folder: "/images/3D"
+    public_folder: "/images/3D"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "hidden", default: "3D Rendering" }
@@ -30,8 +30,8 @@ collections:
     folder: "content/2d"
     create: true
     slug: "{{slug}}"
-    media_folder: "images/Gambar"
-    public_folder: "images/Gambar"
+    media_folder: "/images/Gambar"
+    public_folder: "/images/Gambar"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["2D Illustration", "Character Concept", "Poster Design", "Graphic Design"] }
@@ -44,8 +44,8 @@ collections:
     folder: "content/video"
     create: true
     slug: "{{slug}}"
-    media_folder: "images/Video"
-    public_folder: "images/Video"
+    media_folder: "/images/Video"
+    public_folder: "/images/Video"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category / Format", name: "category", widget: "string", default: "Animated Short Film" }
@@ -60,8 +60,8 @@ collections:
     folder: "content/photo"
     create: true
     slug: "{{slug}}"
-    media_folder: "images/Photography"
-    public_folder: "images/Photography"
+    media_folder: "/images/Photography"
+    public_folder: "/images/Photography"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "string", default: "Cosplay Photography" }
