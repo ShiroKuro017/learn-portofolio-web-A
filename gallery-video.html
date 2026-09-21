@@ -27,110 +27,119 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        .masonry-gallery {
-            column-count: 4;
-            column-gap: 1rem;
+        .video-thumb-container {
+            position: relative;
         }
 
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1rem;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: #111827;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .masonry-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .masonry-item img {
+        .video-card-thumb {
+            position: relative;
+            aspect-ratio: 16 / 9;
             width: 100%;
-            height: auto;
-            display: block;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        @media (max-width: 1024px) {
-            .masonry-gallery { column-count: 3; }
-        }
-        @media (max-width: 768px) {
-            .masonry-gallery { column-count: 2; }
-        }
-        @media (max-width: 640px) {
-            .masonry-gallery { column-count: 1; }
+        .video-card-thumb:hover {
+            transform: translateY(-3px);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.8), 0 0 16px rgba(6, 182, 212, 0.2);
         }
 
-        /* Lightbox Modal - Lightweight & Hardware Accelerated */
-        .lightbox-modal {
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        .video-card-thumb img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
-            padding: 1rem;
-            will-change: opacity, visibility;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
         }
 
-        .lightbox-modal.show {
+        .video-card-thumb:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Video Modal Popup matching dark aesthetic */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            padding: 1.5rem;
+        }
+
+        .video-modal.show {
             opacity: 1;
             visibility: visible;
         }
 
-        .lightbox-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 95vw;
-            max-height: 95vh;
-            transform: scale(0.95);
-            transition: transform 0.2s ease;
-            will-change: transform;
+        .video-modal-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            transform: scale(0.96);
+            transition: transform 0.25s ease;
         }
 
-        .lightbox-modal.show .lightbox-container {
+        .video-modal.show .video-modal-container {
             transform: scale(1);
         }
 
-        .lightbox-content {
-            max-width: 100%;
-            max-height: calc(95vh - 80px);
-            border-radius: 0.375rem;
-        }
-        
-        .lightbox-close {
+        .video-modal-close {
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 36px;
-            font-weight: 300;
+            top: 0.75rem;
+            right: 0.75rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #9ca3af;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            z-index: 20;
         }
 
-        .lightbox-close:hover {
-            color: #9ca3af;
+        .video-modal-close:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.35);
+            background: #1f2937;
         }
 
-        .lightbox-caption {
-            color: #9ca3af;
-            margin-top: 1rem;
-            font-size: 14px;
-            font-family: 'Inconsolata', monospace;
+        .video-embed-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-embed-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
     </style>
     <script src="js/script.js" defer></script>
@@ -147,21 +156,19 @@
 </head>
 <body class="text-gray-300 min-h-screen flex flex-col">
 
+    <!-- Ambient Randomized Lava Lamp Canvas -->
+    <canvas id="lava-canvas" class="lava-canvas" aria-hidden="true"></canvas>
+
     <!-- ===================== HEADER ===================== -->
     <header class="w-full sticky-header">
         <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center relative">
             <a href="index.html" class="text-xl font-bold text-white tracking-tight">ShirO<span class="slash-accent">/</span>Emha Wira</a>
 
-                                    <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html#about" class="hover:text-white text-sm transition-colors w-20 text-center inline-block" data-i18n-en="About" data-i18n-id="Tentang">About</a>
-                <a href="index.html#work" class="hover:text-white text-sm transition-colors text-white font-semibold w-16 text-center inline-block" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
-                <a href="index.html#experience" class="hover:text-white text-sm transition-colors w-28 text-center inline-block" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
-                <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center justify-center gap-2 cursor-pointer select-none py-1 hover:opacity-80 transition-opacity w-14" aria-label="Toggle language">
-                    <span class="lang-en-span text-white font-bold">EN</span>
-                    <span class="text-gray-600 font-light">/</span>
-                    <span class="lang-id-span text-gray-500 font-normal hover:text-gray-300">ID</span>
-                </div>
-                <a href="index.html#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center w-[148px] shrink-0" data-i18n-en="Contact Me ↗" data-i18n-id="Hubungi Saya ↗">Contact Me ↗</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="hover:text-white text-sm transition-colors">About</a>
+                <a href="index.html#work" class="hover:text-white text-sm transition-colors text-white font-semibold">Work</a>
+                <a href="index.html#experience" class="hover:text-white text-sm transition-colors">Experience</a>
+                <a href="index.html#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center">Contact Me ↗</a>
             </div>
 
             <button id="menu-toggle" class="md:hidden text-white p-1" aria-label="Open menu">
@@ -169,17 +176,10 @@
             </button>
 
             <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
-                <a href="index.html#about" data-i18n-en="About" data-i18n-id="Tentang">About</a>
-                <a href="index.html#work" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
-                <a href="index.html#experience" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
-                <a href="index.html#contact" data-i18n-en="Contact" data-i18n-id="Kontak">Contact</a>
-                <div class="pt-3 flex justify-center">
-                    <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center gap-2 cursor-pointer select-none py-1" aria-label="Toggle language">
-                        <span class="lang-en-span text-white font-bold">EN</span>
-                        <span class="text-gray-600 font-light">/</span>
-                        <span class="lang-id-span text-gray-500 font-normal">ID</span>
-                    </div>
-                </div>
+                <a href="index.html#about">About</a>
+                <a href="index.html#work">Work</a>
+                <a href="index.html#experience">Experience</a>
+                <a href="index.html#contact">Contact</a>
             </div>
         </nav>
     </header>
@@ -188,37 +188,57 @@
     <main class="flex-grow max-w-6xl mx-auto px-6 py-12 w-full">
         <!-- Back Navigation -->
         <div class="mb-8">
-            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-white transition-colors group" data-i18n-en="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Back to Selected Work" data-i18n-id="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Kembali ke Karya Pilihan">
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-white transition-colors group">
                 <span class="group-hover:-translate-x-1 transition-transform">←</span> Back to Selected Work
             </a>
         </div>
 
         <!-- Section Title Banner matching zul-redesign -->
-        <div class="mb-12 border-b border-gray-800 pb-8">
-            <p class="section-label mb-2" data-i18n-en="02.3 / VIDEO EDITING GALLERY" data-i18n-id="02.3 / GALERI PENGEDITAN VIDEO">02.3 / VIDEO EDITING GALLERY</p>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4" data-i18n-en="Video Projects &amp; Editing" data-i18n-id="Proyek Video &amp; Pengeditan">
+        <div class="mb-6 border-b border-gray-800 pb-6">
+            <p class="section-label mb-2">02.3 / VIDEO EDITING GALLERY</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
                 Video Projects &amp; Editing
             </h1>
-            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed" data-i18n-en="A collection of video editing, news broadcast editing, OBS live streaming setups, and motion graphics production." data-i18n-id="Kumpulan pengeditan video, pengeditan siaran berita, tata siaran langsung OBS, dan produksi grafis gerak.">
+            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed">
                 A collection of video editing, news broadcast editing, OBS live streaming setups, and motion graphics production.
             </p>
         </div>
 
-        <!-- Masonry Grid -->
-        <div class="masonry-gallery">
+        <!-- Blog / Timeline Projects Container -->
+        <div id="video-projects-feed" class="flex flex-col">
             <!-- Populated via JavaScript -->
         </div>
     </main>
 
     <!-- ===================== FOOTER ===================== -->
     <footer>
-        <div class="max-w-6xl mx-auto px-6 py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-            <p data-i18n-en="© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved." data-i18n-id="© 2026 ShirO / Muhammad Wira Widhana. Hak Cipta Dilindungi.">© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
-            <a href="index.html#work" class="hover:text-white transition-colors flex items-center gap-1" data-i18n-en="← Back to Selected Work" data-i18n-id="← Kembali ke Karya Pilihan">
+        <div class="max-w-6xl mx-auto px-6 py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm font-mono">
+            <p>© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
+            <a href="index.html#work" class="hover:text-white transition-colors flex items-center gap-1">
                 ← Back to Selected Work
             </a>
         </div>
     </footer>
+
+    <!-- Video Modal Popup -->
+    <div id="video-modal" class="video-modal" aria-hidden="true">
+        <div class="video-modal-container">
+            <button id="video-modal-close" class="video-modal-close" aria-label="Close video">&times;</button>
+            <div class="video-embed-wrapper" id="video-embed-box">
+                <!-- Iframe injected via JS -->
+            </div>
+            <div class="p-4 md:p-5 bg-[#111827] border-t border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <h3 id="video-modal-title" class="text-white font-bold text-lg tracking-tight uppercase"></h3>
+                    <p id="video-modal-category" class="text-xs text-gray-400 font-mono"></p>
+                </div>
+                <a id="video-modal-direct-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-red-700/80 hover:bg-red-600 border border-red-500/50 text-white text-xs font-mono font-medium transition-all shrink-0">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span id="modal-btn-text">Watch Directly on YouTube ↗</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -226,84 +246,265 @@
                 lucide.createIcons();
             }
 
-            const galleryContainer = document.querySelector('.masonry-gallery');
-            if (!galleryContainer) return;
+            const feedContainer = document.getElementById('video-projects-feed');
+            if (!feedContainer) return;
 
-            const images = [];
-            for (let i = 17; i <= 35; i++) {
-                images.push(`images/3D/karya-${i}.jpg`);
+            const modal = document.getElementById('video-modal');
+            const embedBox = document.getElementById('video-embed-box');
+            const modalTitle = document.getElementById('video-modal-title');
+            const modalCategory = document.getElementById('video-modal-category');
+            const modalDirectBtn = document.getElementById('video-modal-direct-btn');
+            const modalBtnText = document.getElementById('modal-btn-text');
+            const modalCloseBtn = document.getElementById('video-modal-close');
+
+            let videoItems = [];
+
+            function openVideoModal(item) {
+                if (!item.video_url && !item.video_id) return;
+
+                modalTitle.textContent = item.title || 'Video Project';
+                modalCategory.textContent = `${item.category || ''} ${item.year ? '· ' + item.year : ''}`;
+                modalDirectBtn.href = item.video_url || '#';
+                modalBtnText.textContent = 'Watch Directly on YouTube ↗';
+
+                let videoId = item.video_id;
+                if (!videoId && item.video_url) {
+                    const ytMatch = item.video_url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+                    if (ytMatch && ytMatch[1]) videoId = ytMatch[1];
+                }
+
+                if (videoId) {
+                    embedBox.innerHTML = `
+                        <iframe 
+                            src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&rel=0" 
+                            title="${item.title || 'Video'}"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    `;
+                } else if (item.video_url) {
+                    window.open(item.video_url, '_blank');
+                    return;
+                }
+
+                modal.classList.add('show');
+                modal.setAttribute('aria-hidden', 'false');
+                window.addEventListener('keydown', handleModalKeyDown);
             }
 
-            images.forEach(src => {
-                const item = document.createElement('div');
-                item.className = 'masonry-item';
-                
-                const img = document.createElement('img');
-                img.src = src;
-                img.loading = 'lazy'; 
-                img.onerror = () => { item.style.display = 'none'; }; 
+            function closeVideoModal() {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                embedBox.innerHTML = '';
+                window.removeEventListener('keydown', handleModalKeyDown);
+            }
 
-                item.addEventListener('click', () => {
-                    openLightbox(src);
+            function handleModalKeyDown(e) {
+                if (e.key === 'Escape') closeVideoModal();
+            }
+
+            if (modalCloseBtn) modalCloseBtn.onclick = closeVideoModal;
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeVideoModal();
                 });
+            }
 
-                item.appendChild(img);
-                galleryContainer.appendChild(item);
-            });
+            async function loadVideoProjects() {
+                let items = [];
 
-            function openLightbox(src) {
-                const modal = document.createElement('div');
-                modal.className = 'lightbox-modal';
-                
-                const closeBtn = document.createElement('span');
-                closeBtn.className = 'lightbox-close';
-                closeBtn.innerHTML = '&times;';
-                
-                const container = document.createElement('div');
-                container.className = 'lightbox-container';
-
-                const modalImg = document.createElement('img');
-                modalImg.className = 'lightbox-content';
-                modalImg.src = src;
-
-                const caption = document.createElement('div');
-                caption.className = 'lightbox-caption';
-                const isId = (localStorage.getItem('lang') === 'id');
-                caption.textContent = isId ? 'Tekan ESC atau klik di luar gambar untuk keluar.' : 'Press ESC or click outside the image to exit.';
-
-                container.appendChild(modalImg);
-                container.appendChild(caption);
-
-                modal.appendChild(closeBtn);
-                modal.appendChild(container);
-                document.body.appendChild(modal);
-
-                const closeModal = () => {
-                    modal.classList.remove('show');
-                    window.removeEventListener('keydown', handleEsc);
-                    setTimeout(() => {
-                        if (document.body.contains(modal)) {
-                            document.body.removeChild(modal);
+                // 1. Try serverless API first
+                try {
+                    const res = await fetch('/api/gallery?type=video');
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            items = data;
                         }
-                    }, 300);
-                };
-
-                const handleEsc = (event) => {
-                    if (event.key === 'Escape') {
-                        closeModal();
                     }
-                };
+                } catch (e) {
+                    console.warn('API fetch unavailable, checking static JSON:', e);
+                }
 
-                closeBtn.onclick = closeModal;
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeModal();
+                // 2. Fallback to static JSON file
+                if (items.length === 0) {
+                    try {
+                        const res = await fetch('data/gallery-video.json');
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (Array.isArray(data) && data.length > 0) {
+                                items = data;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('Static JSON unavailable, using hardcoded fallback:', e);
                     }
-                });
-                window.addEventListener('keydown', handleEsc);
+                }
 
-                setTimeout(() => modal.classList.add('show'), 10);
+                // 3. Hardcoded fallback from portfolio slides
+                if (items.length === 0) {
+                    items = [
+                        {
+                            title: "PINGO-PINGU",
+                            category: "Animated Short Film",
+                            year: "2023",
+                            image: "https://img.youtube.com/vi/A4IDpzA_-iY/maxresdefault.jpg",
+                            video_url: "https://youtu.be/A4IDpzA_-iY?si=dBHSknEuiKhHTJFo",
+                            video_id: "A4IDpzA_-iY",
+                            software: "Blender, MSV Studio Pipeline, Premiere Pro",
+                            description: "Short Animation Pingo-Pingu is a project I did for Exhibition TI one of the requirements to graduate from Amikom Yogyakarta. I got a chance to contribute in this project as a 3D character modeler and rendering artist."
+                        },
+                        {
+                            title: "SDIT SALSABILA 2 KLASEMAN",
+                            category: "Profile Company",
+                            year: "2022",
+                            image: "https://img.youtube.com/vi/Hmam3SgA5BY/maxresdefault.jpg",
+                            video_url: "https://youtu.be/Hmam3SgA5BY?si=IwWLrReSXSvIcxyZ",
+                            video_id: "Hmam3SgA5BY",
+                            software: "Premiere Pro, After Effects",
+                            description: "Profile Company SDIT SALSABILA 2 KLASEMAN is a project I did for a videography subject at my college. I had the opportunity to contribute to this project as a Videographer and Director."
+                        },
+                        {
+                            title: "PAMALI \"Mandi di malam hari\"",
+                            category: "Short Film",
+                            year: "2022",
+                            image: "https://img.youtube.com/vi/4sx1_WFQ78s/maxresdefault.jpg",
+                            video_url: "https://youtu.be/4sx1_WFQ78s?si=dI4K6K5SGTJNbBOF",
+                            video_id: "4sx1_WFQ78s",
+                            software: "Premiere Pro, After Effects, DaVinci Resolve",
+                            description: "Short Film PAMALI a project I did for a Directing subject at my college. I learn many things in filmmaking and script writing as a director, videographer, editor, and compositor."
+                        }
+                    ];
+                }
+
+                videoItems = items;
+                renderTimeline(videoItems);
             }
+
+            function renderTimeline(items) {
+                feedContainer.innerHTML = '';
+
+                items.forEach((item, index) => {
+                    const postEl = document.createElement('article');
+                    postEl.className = 'flex flex-col md:flex-row gap-8 lg:gap-12 items-start py-10 border-b border-gray-800/80';
+
+                    // 1. Left Column: Thumbnail and single play action
+                    const leftCol = document.createElement('div');
+                    leftCol.className = 'w-full md:w-[440px] lg:w-[480px] shrink-0 video-thumb-container';
+
+                    const thumbBox = document.createElement('div');
+                    thumbBox.className = 'video-card-thumb group';
+                    thumbBox.setAttribute('role', 'button');
+                    thumbBox.setAttribute('tabindex', '0');
+                    thumbBox.setAttribute('aria-label', `Play ${item.title}`);
+
+                    const img = document.createElement('img');
+                    img.src = item.image || 'https://img.youtube.com/vi/A4IDpzA_-iY/maxresdefault.jpg';
+                    img.alt = item.title || 'Video Thumbnail';
+                    img.loading = 'lazy';
+                    img.onerror = function() {
+                        if (item.video_id) {
+                            this.src = `https://img.youtube.com/vi/${item.video_id}/hqdefault.jpg`;
+                        }
+                    };
+
+                    // Single Play button overlay on image
+                    const playOverlay = document.createElement('div');
+                    playOverlay.className = 'absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center';
+                    playOverlay.innerHTML = `
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-cyan-500 text-black flex items-center justify-center pl-1 shadow-lg transform group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    `;
+
+                    thumbBox.appendChild(img);
+                    thumbBox.appendChild(playOverlay);
+
+                    // Clicking the image opens the video modal
+                    thumbBox.onclick = () => openVideoModal(item);
+                    thumbBox.onkeydown = (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openVideoModal(item);
+                        }
+                    };
+
+                    leftCol.appendChild(thumbBox);
+
+                    // 2. Right Column: Blog Text Information
+                    const rightCol = document.createElement('div');
+                    rightCol.className = 'flex-1 min-w-0 flex flex-col justify-start pt-0.5';
+
+                    const titleEl = document.createElement('h2');
+                    titleEl.className = 'text-xl md:text-2xl font-bold text-white tracking-wide uppercase mb-1.5 font-mono';
+                    titleEl.textContent = item.title || 'Untitled Project';
+
+                    const categoryEl = document.createElement('div');
+                    categoryEl.className = 'text-sm font-mono text-gray-400 mb-0.5';
+                    categoryEl.textContent = item.category || 'Video Project';
+
+                    const yearEl = document.createElement('div');
+                    yearEl.className = 'text-xs font-mono text-gray-500 mb-5';
+                    yearEl.textContent = item.year ? String(item.year) : '2023';
+
+                    const descContainer = document.createElement('div');
+                    descContainer.className = 'text-sm md:text-[14.5px] text-gray-300 font-mono leading-relaxed space-y-3 mb-6 max-w-2xl';
+
+                    const paragraphs = (item.description || '').split(/\n\n+/);
+                    paragraphs.forEach(pText => {
+                        if (pText.trim()) {
+                            const p = document.createElement('p');
+                            p.textContent = pText.trim();
+                            descContainer.appendChild(p);
+                        }
+                    });
+
+                    // Action row at bottom: Direct link to YouTube + software badge
+                    const linkRow = document.createElement('div');
+                    linkRow.className = 'pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-gray-400';
+
+                    if (item.video_url) {
+                        const directYtBtn = document.createElement('a');
+                        directYtBtn.href = item.video_url;
+                        directYtBtn.target = '_blank';
+                        directYtBtn.rel = 'noopener noreferrer';
+                        directYtBtn.className = 'inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors group/link';
+                        directYtBtn.innerHTML = `
+                            <svg class="w-3.5 h-3.5 text-red-500 fill-current group-hover/link:scale-110 transition-transform" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            <span class="group-hover/link:underline">Youtube: Emha Wira 17 · Watch on YouTube ↗</span>
+                        `;
+                        linkRow.appendChild(directYtBtn);
+                    }
+
+                    if (item.software) {
+                        const softBadge = document.createElement('span');
+                        softBadge.className = 'text-gray-500';
+                        softBadge.textContent = `Software: ${item.software}`;
+                        linkRow.appendChild(softBadge);
+                    }
+
+                    rightCol.appendChild(titleEl);
+                    rightCol.appendChild(categoryEl);
+                    rightCol.appendChild(yearEl);
+                    rightCol.appendChild(descContainer);
+                    rightCol.appendChild(linkRow);
+
+                    postEl.appendChild(leftCol);
+                    postEl.appendChild(rightCol);
+
+                    feedContainer.appendChild(postEl);
+                });
+
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+
+            loadVideoProjects();
         });
     </script>
 </body>

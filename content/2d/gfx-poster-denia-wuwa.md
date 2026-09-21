@@ -1,7 +1,8 @@
 ---
 title: GFX Poster Denia Wuwa
 category: Graphic Design
-image: images/denia-malas.jpg
+image: images/Gambar/2d-21-09-2026.jpg
+software: Affinity
 description: >-
   ダーニャ 
 
@@ -15,5 +16,4 @@ description: >-
   I'm still learning to use this tool, though. I wouldn't say it's impossible to learn, but it's tricky to get your head around
 
   #wutheringwaves #wuwa #wuwaedit
-software: Affinity
 ---

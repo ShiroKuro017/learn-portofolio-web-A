@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShirO / Emha Wira, Multimedia Generalist, 3D Rendering Artist, 2D Illustrator based in Yogyakarta.">
+    <title>ShirO / Emha Wira, Multimedia Generalist</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inconsolata', 'monospace'],
+                        mono: ['Inconsolata', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/script.js" defer></script>
+    <!-- Open Graph / Social Media Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shiroportfolio.vercel.app/">
+    <meta property="og:title" content="ShirO / Emha Wira · Multimedia Generalist & 3D Artist">
+    <meta property="og:description" content="2D / 3D Generalist, 3D Rendering Artist, 2D Illustrator based in Yogyakarta. Explore portfolio works.">
+    <meta property="og:image" content="https://shiroportfolio.vercel.app/images/foto-profil.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="ShirO / Emha Wira · Multimedia Generalist & 3D Artist">
+    <meta property="twitter:description" content="2D / 3D Generalist, 3D Rendering Artist, 2D Illustrator based in Yogyakarta. Explore portfolio works.">
+    <meta property="twitter:image" content="https://shiroportfolio.vercel.app/images/foto-profil.png">
+</head>
+<body class="text-gray-300">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="w-full sticky-header">
+        <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center relative">
+            <a href="#hero" class="text-xl font-bold text-white tracking-tight">ShirO<span class="slash-accent">/</span>Emha Wira</a>
+
+                                    <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="hover:text-white text-sm transition-colors w-20 text-center inline-block" data-i18n-en="About" data-i18n-id="Tentang">About</a>
+                <a href="#work" class="hover:text-white text-sm transition-colors w-16 text-center inline-block" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
+                <a href="#experience" class="hover:text-white text-sm transition-colors w-28 text-center inline-block" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
+                <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center justify-center gap-2 cursor-pointer select-none py-1 hover:opacity-80 transition-opacity w-14" aria-label="Toggle language">
+                    <span class="lang-en-span text-white font-bold">EN</span>
+                    <span class="text-gray-600 font-light">/</span>
+                    <span class="lang-id-span text-gray-500 font-normal hover:text-gray-300">ID</span>
+                </div>
+                <a href="#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center w-[148px] shrink-0" data-i18n-en="Contact Me ↗" data-i18n-id="Hubungi Saya ↗">Contact Me ↗</a>
+            </div>
+
+            <button id="menu-toggle" class="md:hidden text-white p-1" aria-label="Open menu">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+
+            <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
+                <a href="#about" data-i18n-en="About" data-i18n-id="Tentang">About</a>
+                <a href="#work" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
+                <a href="#experience" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
+                <a href="#contact" data-i18n-en="Contact" data-i18n-id="Kontak">Contact</a>
+                <div class="pt-3 flex justify-center">
+                    <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center gap-2 cursor-pointer select-none py-1" aria-label="Toggle language">
+                        <span class="lang-en-span text-white font-bold">EN</span>
+                        <span class="text-gray-600 font-light">/</span>
+                        <span class="lang-id-span text-gray-500 font-normal">ID</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ===================== HERO (Fits in 1 screen height) ===================== -->
+        <section id="hero" class="flex flex-col justify-between items-center container mx-auto px-6 py-4 relative" style="min-height: calc(100vh - 70px);">
+            <div class="flex-1 flex flex-col justify-center items-center text-center max-w-3xl mx-auto w-full reveal py-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-3 text-center">
+                    ShirO<span class="slash-accent">/</span>Emha Wira.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-3 text-center" data-i18n-en="2D / 3D Generalist &amp; Multimedia Artist." data-i18n-id="Generalist 2D / 3D &amp; Seniman Multimedia.">
+                    2D / 3D Generalist &amp; Multimedia Artist.
+                </p>
+                <p class="text-sm md:text-base text-gray-500 max-w-xl mx-auto mb-6 leading-relaxed text-center" data-i18n-en="Creating visual experiences, from 3D rendered characters and assets to anime-style illustrations and video production." data-i18n-id="Menciptakan pengalaman visual, dari karakter dan aset 3D render hingga ilustrasi bergaya anime dan produksi video.">
+                    Creating visual experiences, from 3D rendered characters and assets to anime-style illustrations and video production.
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="#work" class="bg-white text-gray-900 font-semibold px-6 py-2.5 rounded-lg hover:bg-gray-200 transition-colors text-sm inline-flex items-center gap-2" data-i18n-en="Explore my work ↗" data-i18n-id="Jelajahi karya saya ↗">
+                        Explore my work ↗
+                    </a>
+                    <a href="CV_Muhammad_Wira_Widhana.pdf" download="CV_Muhammad_Wira_Widhana.pdf" target="_blank" class="border border-gray-700 bg-gray-900 text-white font-semibold px-6 py-2.5 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-colors text-sm inline-flex items-center gap-2" data-i18n-en="Download CV ↓" data-i18n-id="Unduh CV ↓">
+                        Download CV ↓
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero bottom status line (reference: zul-redesign bottom bar) -->
+            <div class="w-full flex flex-col sm:flex-row justify-between items-center pt-4 border-t border-gray-800 text-xs text-gray-400 tracking-wider uppercase gap-3 reveal shrink-0">
+                <div class="flex items-center gap-2">
+                    <span class="status-dot"></span>
+                    <span class="text-gray-400" data-i18n-en="Currently Studying Master of Information Technology, Intelligent Multimedia Technology at Universitas Amikom Yogyakarta" data-i18n-id="Saat ini Menempuh Pendidikan Magister Teknik Informatika (Intelligent Multimedia Technology) di Universitas Amikom Yogyakarta">Currently Studying Master of Information Technology, Intelligent Multimedia Technology at Universitas Amikom Yogyakarta</span>
+                </div>
+                <a href="#about" class="text-gray-500 hover:text-white transition-colors flex items-center gap-1 shrink-0" data-i18n-en="SCROLL TO EXPLORE ↓" data-i18n-id="GULIR UNTUK MENJELAJAHI ↓">
+                    SCROLL TO EXPLORE ↓
+                </a>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ===================== ABOUT ===================== -->
+        <section id="about" class="py-24 md:py-32 container mx-auto px-6">
+            <div class="reveal">
+                <p class="section-label" data-i18n-en="01 / THE ARTIST" data-i18n-id="01 / SENIMAN">01 / THE ARTIST</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-16 tracking-tight" data-i18n-en="Creating visual<br>experiences." data-i18n-id="Menciptakan pengalaman<br>visual.">
+                    Creating visual<br>experiences.
+                </h2>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl p-8 md:p-12 border border-gray-800 reveal reveal-d1">
+                <div class="grid md:grid-cols-3 gap-10 items-start">
+                    <div class="md:col-span-1">
+                        <img
+                            src="images/foto-profil.png"
+                            alt="ShirO / Emha Wira"
+                            class="rounded-lg shadow-2xl w-full h-auto object-cover"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x500/1f2937/ffffff?text=ShirO';"
+                        >
+                    </div>
+                    <div class="md:col-span-2 space-y-5">
+                        <h3 class="text-2xl font-bold text-white" data-i18n-en="About Me" data-i18n-id="Tentang Saya">About Me</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Hello! I'm <span class="text-white font-semibold">Muhammad Wira Widhana</span>, also known as <span class="text-white font-semibold">ShirO</span>, a 2D/3D Generalist and Multimedia Generalist focused on 3D assets and 2D illustration character portraits with an anime style.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed">
+                            I create 3D assets for games and animation, from characters to props, with full texturing. For 2D illustration, I focus on concept characters with an anime aesthetic. My main goal is to create art that delivers strong visuals and meaning to its audience.
+                        </p>
+                        <div class="pt-4">
+                            <p class="section-label mb-3" data-i18n-en="Skills &amp; Tools" data-i18n-id="Keahlian &amp; Perangkat">Skills &amp; Tools</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag">Blender 3D</span>
+                                <span class="skill-tag">Maya</span>
+                                <span class="skill-tag">Substance Painter</span>
+                                <span class="skill-tag">3D Rendering</span>
+                                <span class="skill-tag">2D Illustration</span>
+                                <span class="skill-tag">After Effects</span>
+                                <span class="skill-tag">Premiere Pro</span>
+                                <span class="skill-tag">OBS / Live Stream</span>
+                                <span class="skill-tag">Machine Learning</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ===================== WORK (Exact zul-redesign layout) ===================== -->
+        <section id="work" class="py-20 md:py-28 container mx-auto px-6">
+            <!-- Header split matching zul-redesign -->
+            <div class="reveal flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12">
+                <div class="md:w-1/2">
+                    <p class="section-label mb-2" data-i18n-en="02 / SELECTED WORK" data-i18n-id="02 / KARYA PILIHAN">02 / SELECTED WORK</p>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight" data-i18n-en="Art made with purpose.<br>Built to inspire." data-i18n-id="Karya yang bermakna.<br>Dibuat untuk menginspirasi.">
+                        Art made with purpose.<br>Built to inspire.
+                    </h2>
+                </div>
+                <div class="md:w-1/2 flex md:justify-end">
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md" data-i18n-en="Personal projects, creative illustrations, 3D renders, and a constant passion for visual storytelling and digital art." data-i18n-id="Proyek pribadi, ilustrasi kreatif, render 3D, dan dedikasi berkelanjutan untuk penceritaan visual dan seni digital.">
+                        Personal projects, creative illustrations, 3D renders, and a constant passion for visual storytelling and digital art.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2-column Grid matching zul-redesign cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal reveal-d1">
+                
+                <!-- Project 01: 3D Rendering -->
+                <div class="group flex flex-col">
+                    <a href="gallery-3d.html" class="block bg-gray-900 border border-gray-800 group-hover:border-gray-600 rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="flex justify-between items-center px-3.5 py-2 text-xs font-mono text-gray-500 uppercase tracking-widest border-b border-gray-800/80">
+                            <span>01 / 3D Rendering</span>
+                            <span class="group-hover:text-white transition-colors">↗</span>
+                        </div>
+                        <div class="p-3 relative">
+                            <div class="rounded-lg overflow-hidden border border-gray-800 bg-gray-950" style="aspect-ratio: 16/9;">
+                                <img src="images/3D/karya-36.jpg" alt="3D Rendering"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x337/1f2937/333?text=3D+Rendering';">
+                            </div>
+                            <div class="absolute bottom-5 right-5">
+                                <span class="px-2.5 py-1 bg-gray-900/90 border border-gray-700 text-xs text-white rounded-lg font-mono inline-flex items-center gap-1 shadow-lg group-hover:bg-white group-hover:text-gray-900 transition-colors">
+                                    View Gallery ↗
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="pt-3.5 px-1">
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-1.5 group-hover:text-gray-200 transition-colors">
+                            <a href="gallery-3d.html">3D Rendering</a>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-2.5">
+                            Characters, props, environment assets, and high quality final 3D renders with Substance Painter texturing.
+                        </p>
+                        <a href="gallery-3d.html" class="inline-flex items-center gap-1 text-xs font-mono text-gray-400 group-hover:text-white transition-colors">
+                            View Gallery ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 02: Drawing & Illustration -->
+                <div class="group flex flex-col">
+                    <a href="gallery-drawing.html" class="block bg-gray-900 border border-gray-800 group-hover:border-gray-600 rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="flex justify-between items-center px-3.5 py-2 text-xs font-mono text-gray-500 uppercase tracking-widest border-b border-gray-800/80">
+                            <span>02 / 2D Art &amp; Graphic Design</span>
+                            <span class="group-hover:text-white transition-colors">↗</span>
+                        </div>
+                        <div class="p-3 relative">
+                            <div class="rounded-lg overflow-hidden border border-gray-800 bg-gray-950" style="aspect-ratio: 16/9;">
+                                <img src="images/Gambar/karya-12.jpg" alt="2D Art &amp; Graphic Design"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x337/1f2937/333?text=2D+Art';">
+                            </div>
+                            <div class="absolute bottom-5 right-5">
+                                <span class="px-2.5 py-1 bg-gray-900/90 border border-gray-700 text-xs text-white rounded-lg font-mono inline-flex items-center gap-1 shadow-lg group-hover:bg-white group-hover:text-gray-900 transition-colors">
+                                    View Gallery ↗
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="pt-3.5 px-1">
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-1.5 group-hover:text-gray-200 transition-colors">
+                            <a href="gallery-drawing.html" data-i18n-en="2D Art &amp; Graphic Design" data-i18n-id="Seni 2D &amp; Desain Grafis">2D Art &amp; Graphic Design</a>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-2.5" data-i18n-en="Anime-style concept art, character portraits, poster design, branding, and graphic design projects." data-i18n-id="Seni konsep karakter bergaya anime, potret karakter, desain poster, branding, dan proyek desain grafis.">
+                            Anime-style concept art, character portraits, poster design, branding, and graphic design projects.
+                        </p>
+                        <a href="gallery-drawing.html" class="inline-flex items-center gap-1 text-xs font-mono text-gray-400 group-hover:text-white transition-colors">
+                            View Gallery ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 03: Video Projects -->
+                <div class="group flex flex-col">
+                    <a href="gallery-video.html" class="block bg-gray-900 border border-gray-800 group-hover:border-gray-600 rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="flex justify-between items-center px-3.5 py-2 text-xs font-mono text-gray-500 uppercase tracking-widest border-b border-gray-800/80">
+                            <span>03 / Video Projects</span>
+                            <span class="group-hover:text-white transition-colors">↗</span>
+                        </div>
+                        <div class="p-3 relative">
+                            <div class="rounded-lg overflow-hidden border border-gray-800 bg-gray-950" style="aspect-ratio: 16/9;">
+                                <img src="images/3D/karya-17.jpg" alt="Video Projects"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x337/1f2937/333?text=Video';">
+                            </div>
+                            <div class="absolute bottom-5 right-5">
+                                <span class="px-2.5 py-1 bg-gray-900/90 border border-gray-700 text-xs text-white rounded-lg font-mono inline-flex items-center gap-1 shadow-lg group-hover:bg-white group-hover:text-gray-900 transition-colors">
+                                    View Gallery ↗
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="pt-3.5 px-1">
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-1.5 group-hover:text-gray-200 transition-colors">
+                            <a href="gallery-video.html">Video Projects</a>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-2.5">
+                            Video editing, news broadcast editing, OBS live streaming, and motion graphics production.
+                        </p>
+                        <a href="gallery-video.html" class="inline-flex items-center gap-1 text-xs font-mono text-gray-400 group-hover:text-white transition-colors">
+                            View Gallery ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 04: Photography -->
+                <div class="group flex flex-col">
+                    <a href="gallery-photo.html" class="block bg-gray-900 border border-gray-800 group-hover:border-gray-600 rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="flex justify-between items-center px-3.5 py-2 text-xs font-mono text-gray-500 uppercase tracking-widest border-b border-gray-800/80">
+                            <span>04 / Photography</span>
+                            <span class="group-hover:text-white transition-colors">↗</span>
+                        </div>
+                        <div class="p-3 relative">
+                            <div class="rounded-lg overflow-hidden border border-gray-800 bg-gray-950" style="aspect-ratio: 16/9;">
+                                <img src="images/3D/karya-36.jpg" alt="Photography"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x337/1f2937/333?text=Photography';">
+                            </div>
+                            <div class="absolute bottom-5 right-5">
+                                <span class="px-2.5 py-1 bg-gray-900/90 border border-gray-700 text-xs text-white rounded-lg font-mono inline-flex items-center gap-1 shadow-lg group-hover:bg-white group-hover:text-gray-900 transition-colors">
+                                    View Gallery ↗
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="pt-3.5 px-1">
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-1.5 group-hover:text-gray-200 transition-colors">
+                            <a href="gallery-photo.html">Photography</a>
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-2.5">
+                            Creative photography, portrait shots, and digital photo editing projects.
+                        </p>
+                        <a href="gallery-photo.html" class="inline-flex items-center gap-1 text-xs font-mono text-gray-400 group-hover:text-white transition-colors">
+                            View Gallery ↗
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ===================== EXPERIENCE ===================== -->
+        <section id="experience" class="py-24 md:py-32 container mx-auto px-6">
+            <div class="reveal">
+                <p class="section-label" data-i18n-en="03 / THE JOURNEY" data-i18n-id="03 / PERJALANAN">03 / THE JOURNEY</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-i18n-en="Experience that<br>shapes the work." data-i18n-id="Pengalaman yang<br>membentuk karya.">Experience that<br>shapes the work.</h2>
+                <p class="text-gray-500 max-w-xl mb-16" data-i18n-en="My professional path in the animation industry and creative work." data-i18n-id="Jejak profesional saya di industri animasi dan karya kreatif.">My professional path in the animation industry and creative work.</p>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl p-8 md:p-12 border border-gray-800 reveal reveal-d1">
+                <div class="space-y-0 mb-12">
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Sep 2023, Dec 2023</p>
+                        <h3 class="text-lg font-bold text-white">Forum Asisten</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Assistant Lecturer, 3D Animation" data-i18n-id="Asisten Dosen, Animasi 3D">Assistant Lecturer, 3D Animation</p>
+                        <p class="text-xs text-gray-600 mb-3">Universitas Amikom Yogyakarta · Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="Assisted lecturers in teaching course material to students facing learning difficulties." data-i18n-id="Membantu dosen dalam mengajar materi kuliah kepada mahasiswa yang mengalami kesulitan belajar.">Assisted lecturers in teaching course material to students facing learning difficulties.</li>
+                            <li data-i18n-en="Demonstrated low-poly character creation, from modeling in Blender 3D to texturing in Substance Painter." data-i18n-id="Mendemonstrasikan pembuatan karakter low-poly, mulai dari pemodelan karakter di Blender 3D hingga peneksturan di Substance Painter.">Demonstrated low-poly character creation, from modeling in Blender 3D to texturing in Substance Painter.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Sep 2023, Dec 2023</p>
+                        <h3 class="text-lg font-bold text-white">Forum Asisten</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Assistant Lecturer, AR and VR" data-i18n-id="Asisten Dosen, AR dan VR">Assistant Lecturer, AR and VR</p>
+                        <p class="text-xs text-gray-600 mb-3">Universitas Amikom Yogyakarta · Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="Assisted lecturers in teaching Augmented Reality and Virtual Reality course materials." data-i18n-id="Membantu dosen dalam mengajar materi kuliah Augmented Reality dan Virtual Reality.">Assisted lecturers in teaching Augmented Reality and Virtual Reality course materials.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Sep 2023, Dec 2023</p>
+                        <h3 class="text-lg font-bold text-white">Forum Asisten</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Assistant Lecturer, Basic Animation" data-i18n-id="Asisten Dosen, Animasi Dasar">Assistant Lecturer, Basic Animation</p>
+                        <p class="text-xs text-gray-600 mb-3">Universitas Amikom Yogyakarta · Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="Assisted lecturers in teaching foundational 2D and 3D animation principles and practical techniques." data-i18n-id="Membantu dosen dalam mengajar prinsip dasar dan teknik praktis animasi 2D dan 3D.">Assisted lecturers in teaching foundational 2D and 3D animation principles and practical techniques.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Feb 2023, Nov 2023</p>
+                        <h3 class="text-lg font-bold text-white">MSV Studio</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Junior Render Artist" data-i18n-id="Junior Render Artist">Junior Render Artist</p>
+                        <p class="text-xs text-gray-600 mb-3">Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="3D Rendering Artist for the 'Ajisaka: The King and The Flower of Life' animated feature film project." data-i18n-id="3D Rendering Artist untuk proyek film animasi layar lebar 'Ajisaka: The King and The Flower of Life'.">3D Rendering Artist for the "Ajisaka: The King and The Flower of Life" animated feature film project.</li>
+                            <li data-i18n-en="Rendered specific scenes and shots throughout production pipelines." data-i18n-id="Melakukan proses rendering adegan dan shot tertentu dalam alur produksi.">Rendered specific scenes and shots throughout production pipelines.</li>
+                            <li data-i18n-en="Reloaded 3D assets to resolve texture or Maya scene file errors." data-i18n-id="Memuat ulang aset 3D untuk menyelesaikan kendala tekstur atau file adegan Maya.">Reloaded 3D assets to resolve texture or Maya scene file errors.</li>
+                            <li data-i18n-en="Inspected lighting, textures, animation, and asset integration for final production output." data-i18n-id="Memeriksa kendala pencahayaan, tekstur, animasi, dan integrasi aset untuk hasil produksi akhir.">Inspected lighting, textures, animation, and asset integration for final production output.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Mar 2023, Jun 2023</p>
+                        <h3 class="text-lg font-bold text-white">Forum Asisten</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Assistant Lecturer, Broadcasting" data-i18n-id="Asisten Dosen, Penyiaran (Broadcasting)">Assistant Lecturer, Broadcasting</p>
+                        <p class="text-xs text-gray-600 mb-3">Universitas Amikom Yogyakarta · Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="Assisted lecturers in teaching broadcasting and video editing course materials." data-i18n-id="Membantu dosen dalam mengajar materi kuliah penyiaran dan pengeditan video.">Assisted lecturers in teaching broadcasting and video editing course materials.</li>
+                            <li data-i18n-en="Guided video editing in Premiere Pro, After Effects, Audition, and live stream broadcasting setups using OBS." data-i18n-id="Membimbing pengeditan video berita di Premiere Pro, After Effects, Audition, serta siaran langsung menggunakan OBS.">Guided video editing in Premiere Pro, After Effects, Audition, and live stream broadcasting setups using OBS.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Feb 2019, May 2019</p>
+                        <h3 class="text-lg font-bold text-white">Fakultas Farmasi UGM</h3>
+                        <p class="text-gray-400 text-sm font-semibold mb-1" data-i18n-en="Network Systems Administrator (Internship)" data-i18n-id="Administrator Sistem Jaringan (Magang)">Network Systems Administrator (Internship)</p>
+                        <p class="text-xs text-gray-600 mb-3">Yogyakarta, Indonesia</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                            <li data-i18n-en="Installed LAN network infrastructure between buildings and maintained network hardware." data-i18n-id="Menginstal infrastruktur jaringan LAN antar gedung dan memelihara perangkat keras jaringan.">Installed LAN network infrastructure between buildings and maintained network hardware.</li>
+                            <li data-i18n-en="Monitored network traffic and configured computers for UTBK national computer-based testing." data-i18n-id="Memantau lalu lintas jaringan dan mengonfigurasi komputer untuk pelaksanaan ujian nasional UTBK.">Monitored network traffic and configured computers for UTBK national computer-based testing.</li>
+                            <li data-i18n-en="Performed diagnostic hardware repairs and system troubleshooting." data-i18n-id="Melakukan perbaikan diagnostik perangkat keras dan penanganan kendala sistem.">Performed diagnostic hardware repairs and system troubleshooting.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <hr class="section-divider mb-8">
+                <p class="section-label mb-5" data-i18n-en="Education" data-i18n-id="Pendidikan">Education</p>
+                <div class="grid md:grid-cols-2 gap-4 mb-8">
+                    <!-- Highlighted Currently Studying Card -->
+                    <div class="bg-gray-900 rounded-lg p-5 border border-green-500/40">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="status-dot"></span>
+                            <span class="text-xs text-green-400 font-bold uppercase tracking-widest" data-i18n-en="Currently Studying at" data-i18n-id="Saat ini Menempuh Pendidikan di">Currently Studying at</span>
+                        </div>
+                        <p class="text-xs text-green-400/90 uppercase tracking-widest mb-1">Universitas Amikom Yogyakarta</p>
+                        <h4 class="text-green-400 font-bold mb-0.5 text-lg" data-i18n-en="Master of Information Technology" data-i18n-id="Magister Teknik Informatika">Master of Information Technology</h4>
+                        <p class="text-green-300/80 text-sm font-medium" data-i18n-en="Intelligent Multimedia Technology" data-i18n-id="Intelligent Multimedia Technology">Intelligent Multimedia Technology</p>
+                    </div>
+                    
+                    <div class="bg-gray-900 rounded-lg p-5 border border-gray-800">
+                        <p class="text-xs text-gray-600 uppercase tracking-widest mb-1">Universitas Amikom Yogyakarta</p>
+                        <h4 class="text-white font-bold mb-0.5" data-i18n-en="Bachelor of Information Technology" data-i18n-id="Sarjana (S1) Teknologi Informasi">Bachelor of Information Technology</h4>
+                        <p class="text-gray-400 text-sm"><span data-i18n-en="GPA" data-i18n-id="IPK">GPA</span> <span class="text-white font-semibold">3.81</span></p>
+                    </div>
+                </div>
+
+                <hr class="section-divider mb-8">
+                <p class="section-label mb-5" data-i18n-en="Volunteering Experience" data-i18n-id="Pengalaman Sukarela">Volunteering Experience</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-900 rounded-lg p-5 border border-gray-800">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Jul 2026</p>
+                        <h4 class="text-white font-bold mb-0.5" data-i18n-en="Volunteer Staff" data-i18n-id="Staf Relawan">Volunteer Staff</h4>
+                        <p class="text-xs text-gray-400 font-semibold mb-2">JLPT - Japanese Language Proficiency Test · Yogyakarta</p>
+                        <p class="text-xs text-gray-400 leading-relaxed" data-i18n-en="Invited as volunteer staff in areas N1, N2, N3 for region Yogyakarta to help prepare exam rooms, assist candidates, and manage test logistics." data-i18n-id="Diundang sebagai staf relawan di area N1, N2, N3 wilayah Yogyakarta untuk membantu persiapan ruang ujian, mendampingi peserta, dan mengelola logistik ujian.">Invited as volunteer staff in areas N1, N2, N3 for region Yogyakarta to help prepare exam rooms, assist candidates, and manage test logistics.</p>
+                    </div>
+
+                    <div class="bg-gray-900 rounded-lg p-5 border border-gray-800">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Dec 2025</p>
+                        <h4 class="text-white font-bold mb-0.5" data-i18n-en="Volunteer Staff" data-i18n-id="Staf Relawan">Volunteer Staff</h4>
+                        <p class="text-xs text-gray-400 font-semibold mb-2">JLPT - Japanese Language Proficiency Test · Yogyakarta</p>
+                        <p class="text-xs text-gray-400 leading-relaxed" data-i18n-en="Invited as volunteer staff in areas N1, N2, N5 for region Yogyakarta to help prepare exam rooms, assist candidates, and manage test logistics." data-i18n-id="Diundang sebagai staf relawan di area N1, N2, N5 wilayah Yogyakarta untuk membantu persiapan ruang ujian, mendampingi peserta, dan mengelola logistik ujian.">Invited as volunteer staff in areas N1, N2, N5 for region Yogyakarta to help prepare exam rooms, assist candidates, and manage test logistics.</p>
+                    </div>
+
+                    <div class="bg-gray-900 rounded-lg p-5 border border-gray-800">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Jul 2025</p>
+                        <h4 class="text-white font-bold mb-0.5" data-i18n-en="Volunteer Staff" data-i18n-id="Staf Relawan">Volunteer Staff</h4>
+                        <p class="text-xs text-gray-400 font-semibold mb-2">JLPT - Japanese Language Proficiency Test · Yogyakarta</p>
+                        <p class="text-xs text-gray-400 leading-relaxed" data-i18n-en="Invited as volunteer staff in areas N3, N4 to help prepare exam rooms, assist in moving equipment, and manage test logistics." data-i18n-id="Diundang sebagai staf relawan di area N3, N4 untuk membantu persiapan ruang ujian, pemindahan perlengkapan, dan mengelola logistik ujian.">Invited as volunteer staff in areas N3, N4 to help prepare exam rooms, assist in moving equipment, and manage test logistics.</p>
+                    </div>
+
+                    <div class="bg-gray-900 rounded-lg p-5 border border-gray-800">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-1">Dec 2024</p>
+                        <h4 class="text-white font-bold mb-0.5" data-i18n-en="Volunteer Staff" data-i18n-id="Staf Relawan">Volunteer Staff</h4>
+                        <p class="text-xs text-gray-400 font-semibold mb-2">JLPT - Japanese Language Proficiency Test · Yogyakarta</p>
+                        <p class="text-xs text-gray-400 leading-relaxed" data-i18n-en="Invited as volunteer staff in areas N1, N2, N5 to help prepare exam rooms, assist in moving equipment, and manage test logistics." data-i18n-id="Diundang sebagai staf relawan di area N1, N2, N5 untuk membantu persiapan ruang ujian, pemindahan perlengkapan, dan mengelola logistik ujian.">Invited as volunteer staff in areas N1, N2, N5 to help prepare exam rooms, assist in moving equipment, and manage test logistics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ===================== CONTACT ===================== -->
+        <section id="contact" class="py-24 md:py-32 text-center relative overflow-hidden">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-4" data-i18n-en="Interested in Working Together?" data-i18n-id="Tertarik untuk Bekerja Sama?">
+                        Interested in Working Together?
+                    </h2>
+                    <p class="text-gray-400 max-w-md mx-auto mb-10" data-i18n-en="I am always open to discussing new projects, collaborations, or just saying hello." data-i18n-id="Saya selalu terbuka untuk mendiskusikan proyek baru, kolaborasi, atau sekadar menyapa.">
+                        I am always open to discussing new projects, collaborations, or just saying hello.
+                    </p>
+                    
+                    <!-- Exact contact email line animation matching learn-portofolio-web-A -->
+                    <div id="email-wrapper" class="mb-12">
+                        <a id="email-link" href="#" class="contact-email-link" data-i18n-en="Email Me ↗" data-i18n-id="Kirim Email ↗">
+                            Email Me ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social media links styled as animated text links matching email link -->
+                <div class="reveal reveal-d1">
+                    <p class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6" data-i18n-en="Find me on social media" data-i18n-id="Temukan saya di media sosial">Find me on social media</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/emhawira_/" target="_blank" rel="noopener noreferrer" class="social-animated-link">
+                            Instagram ↗
+                        </a>
+                        <a href="https://www.linkedin.com/in/muhammad-wira-widhana" target="_blank" rel="noopener noreferrer" class="social-animated-link">
+                            LinkedIn ↗
+                        </a>
+                        <a href="https://www.youtube.com/@emhawira17" target="_blank" rel="noopener noreferrer" class="social-animated-link">
+                            YouTube ↗
+                        </a>
+                        <a href="https://x.com/emhawira_" target="_blank" rel="noopener noreferrer" class="social-animated-link">
+                            X / Twitter ↗
+                        </a>
+                        <a href="https://www.artstation.com/shiro17" target="_blank" rel="noopener noreferrer" class="social-animated-link">
+                            ArtStation ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-2 text-gray-600 text-sm">
+            <p data-i18n-en="© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved." data-i18n-id="© 2026 ShirO / Muhammad Wira Widhana. Hak Cipta Dilindungi.">© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
+            <a href="#hero" class="hover:text-gray-400 transition-colors" data-i18n-en="Back to top ↑" data-i18n-id="Kembali ke atas ↑">Back to top ↑</a>
+        </div>
+    </footer>
+
+    <script>
+        // Anti-scraping Email Handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const u = 'mh.wira17';
+            const d = 'gmail.com';
+            const emailLink = document.getElementById('email-link');
+            if (emailLink) {
+                emailLink.href = 'mailto:' + u + '@' + d;
+            }
+        });
+    </script>
+</body>
+</html>

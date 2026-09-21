@@ -1,0 +1,38 @@
+[
+  {
+    "title": "PINGO-PINGU",
+    "category": "Animated Short Film",
+    "category_id": "Film Animasi Pendek",
+    "year": "2023",
+    "image": "https://img.youtube.com/vi/A4IDpzA_-iY/maxresdefault.jpg",
+    "video_url": "https://youtu.be/A4IDpzA_-iY?si=dBHSknEuiKhHTJFo",
+    "video_id": "A4IDpzA_-iY",
+    "software": "Blender, MSV Studio Pipeline, Premiere Pro",
+    "description": "Short Animation Pingo-Pingu is a project I did for Exhibition TI one of the requirements to graduate from Amikom Yogyakarta. I got a chance to contribute in this project as a 3D character modeler and rendering artist.",
+    "description_id": "Animasi Pendek Pingo-Pingu merupakan proyek yang saya kerjakan untuk Pameran TI sebagai salah satu syarat kelulusan dari Universitas Amikom Yogyakarta. Saya berkesempatan berkontribusi dalam proyek ini sebagai 3D character modeler dan rendering artist."
+  },
+  {
+    "title": "SDIT SALSABILA 2 KLASEMAN",
+    "category": "Profile Company",
+    "category_id": "Profil Perusahaan",
+    "year": "2022",
+    "image": "https://img.youtube.com/vi/Hmam3SgA5BY/maxresdefault.jpg",
+    "video_url": "https://youtu.be/Hmam3SgA5BY?si=IwWLrReSXSvIcxyZ",
+    "video_id": "Hmam3SgA5BY",
+    "software": "Premiere Pro, After Effects",
+    "description": "Profile Company SDIT SALSABILA 2 KLASEMAN is a project I did for a videography subject at my college. I had the opportunity to contribute to this project as a Videographer and Director.",
+    "description_id": "Profil Perusahaan SDIT SALSABILA 2 KLASEMAN merupakan proyek yang saya kerjakan untuk mata kuliah videografi di kampus. Saya berkesempatan berkontribusi dalam proyek ini sebagai Videografer dan Sutradara."
+  },
+  {
+    "title": "PAMALI \"Mandi di malam hari\"",
+    "category": "Short Film",
+    "category_id": "Film Pendek",
+    "year": "2022",
+    "image": "https://img.youtube.com/vi/4sx1_WFQ78s/maxresdefault.jpg",
+    "video_url": "https://youtu.be/4sx1_WFQ78s?si=dI4K6K5SGTJNbBOF",
+    "video_id": "4sx1_WFQ78s",
+    "software": "Premiere Pro, After Effects, DaVinci Resolve",
+    "description": "Short Film PAMALI a project I did for a Directing subject at my college. I learn many things in filmmaking and script writing as a director, videographer, editor, and compositor.",
+    "description_id": "Film Pendek PAMALI adalah proyek yang saya kerjakan untuk mata kuliah Penyutradaraan di kampus. Saya mempelajari banyak hal dalam pembuatan film dan penulisan naskah sebagai sutradara, videografer, editor, dan kompositor."
+  }
+]

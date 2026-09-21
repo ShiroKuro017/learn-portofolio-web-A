@@ -1,0 +1,58 @@
+backend:
+  name: github
+  repo: ShiroKuro017/learn-portofolio-web-A
+  branch: main
+  base_url: https://decap-cms-oauth.vercel.app
+
+site_url: https://shiroportfolio.vercel.app
+display_url: https://shiroportfolio.vercel.app
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "3d_rendering"
+    label: "01 / 3D Rendering & Modeling"
+    folder: "content/3d"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "hidden", default: "3D Rendering" }
+      - { label: "Image / Render", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Software Used", name: "software", widget: "string", default: "Blender 3D, Substance Painter" }
+
+  - name: "2d_art_graphic_design"
+    label: "02 / 2D Art & Graphic Design"
+    folder: "content/2d"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["2D Illustration", "Character Concept", "Poster Design", "Graphic Design"] }
+      - { label: "Artwork Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Software Used", name: "software", widget: "string", default: "Clip Studio Paint, Photoshop" }
+
+  - name: "video_projects"
+    label: "03 / Video Projects"
+    folder: "content/video"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "YouTube / Video URL", name: "video_url", widget: "string", required: false }
+      - { label: "Thumbnail Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Software Used", name: "software", widget: "string", default: "Premiere Pro, After Effects, OBS" }
+
+  - name: "photography"
+    label: "04 / Photography"
+    folder: "content/photo"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photo Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text", required: false }

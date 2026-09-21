@@ -16,6 +16,8 @@ collections:
     folder: "content/3d"
     create: true
     slug: "{{slug}}"
+    media_folder: "images/3D"
+    public_folder: "images/3D"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "hidden", default: "3D Rendering" }
@@ -28,31 +30,40 @@ collections:
     folder: "content/2d"
     create: true
     slug: "{{slug}}"
+    media_folder: "images/Gambar"
+    public_folder: "images/Gambar"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["2D Illustration", "Character Concept", "Poster Design", "Graphic Design"] }
       - { label: "Artwork Image", name: "image", widget: "image" }
       - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Software Used", name: "software", widget: "string", default: "Clip Studio Paint, Photoshop" }
+      - { label: "Software Used", name: "software", widget: "string", default: "Clip Studio Paint, Photoshop, Affinity" }
 
   - name: "video_projects"
     label: "03 / Video Projects"
     folder: "content/video"
     create: true
     slug: "{{slug}}"
+    media_folder: "images/Video"
+    public_folder: "images/Video"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "YouTube / Video URL", name: "video_url", widget: "string", required: false }
+      - { label: "Category / Format", name: "category", widget: "string", default: "Animated Short Film" }
+      - { label: "Year", name: "year", widget: "string", default: "2023" }
       - { label: "Thumbnail Image", name: "image", widget: "image" }
+      - { label: "YouTube / Video URL", name: "video_url", widget: "string", required: false }
+      - { label: "Software Used", name: "software", widget: "string", default: "Premiere Pro, After Effects, Blender" }
       - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Software Used", name: "software", widget: "string", default: "Premiere Pro, After Effects, OBS" }
 
   - name: "photography"
     label: "04 / Photography"
     folder: "content/photo"
     create: true
     slug: "{{slug}}"
+    media_folder: "images/Photography"
+    public_folder: "images/Photography"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "string", default: "Cosplay Photography" }
       - { label: "Photo Image", name: "image", widget: "image" }
       - { label: "Description", name: "description", widget: "text", required: false }

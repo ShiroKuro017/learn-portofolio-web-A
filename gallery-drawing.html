@@ -65,7 +65,7 @@
             .masonry-gallery { column-count: 1; }
         }
 
-        /* Lightbox Modal - Lightweight & Hardware Accelerated */
+        /* Enhanced Lightbox Modal with Metadata Sidebar */
         .lightbox-modal {
             position: fixed;
             z-index: 1000;
@@ -73,14 +73,15 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
-            padding: 1rem;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            padding: 1.25rem;
             will-change: opacity, visibility;
         }
 
@@ -91,46 +92,194 @@
 
         .lightbox-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 95vw;
-            max-height: 95vh;
-            transform: scale(0.95);
-            transition: transform 0.2s ease;
-            will-change: transform;
+            flex-direction: row;
+            align-items: stretch;
+            max-width: min(90vw, calc(100vw - 140px));
+            max-height: 90vh;
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            transform: scale(0.96);
+            transition: transform 0.25s ease;
+            position: relative;
         }
 
         .lightbox-modal.show .lightbox-container {
             transform: scale(1);
         }
 
+        .lightbox-image-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            min-width: 0;
+            max-height: 90vh;
+            padding: 1rem;
+            position: relative;
+        }
+
         .lightbox-content {
             max-width: 100%;
-            max-height: calc(95vh - 80px);
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             border-radius: 0.375rem;
+            user-select: none;
         }
-        
+
+        .lightbox-sidebar {
+            width: 360px;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: #111827;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            overflow-y: auto;
+            max-height: 90vh;
+            transition: all 0.25s ease;
+        }
+
+        .lightbox-sidebar.collapsed {
+            display: none !important;
+        }
+
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 36px;
-            font-weight: 300;
+            top: 1rem;
+            right: 1.25rem;
+            color: #9ca3af;
+            font-size: 28px;
+            line-height: 1;
             cursor: pointer;
             transition: color 0.2s ease;
+            z-index: 20;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 0.5rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .lightbox-close:hover {
-            color: #9ca3af;
+            color: #ffffff;
+            background: rgba(255,255,255,0.1);
         }
 
-        .lightbox-caption {
+        .lightbox-toggle-sidebar {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
             color: #9ca3af;
-            margin-top: 1rem;
-            font-size: 14px;
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             font-family: 'Inconsolata', monospace;
+            font-size: 11px;
+            padding: 0.35rem 0.65rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .lightbox-toggle-sidebar:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: #1f2937;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 58px;
+            font-weight: 200;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 110;
+            user-select: none;
+            padding: 0.5rem;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-nav-btn:hover {
+            color: #ffffff;
+            transform: translateY(-50%) scale(1.15);
+            text-shadow: 0 0 16px rgba(255, 255, 255, 0.6);
+        }
+
+        .lightbox-nav-btn.prev {
+            left: 1.25rem;
+        }
+
+        .lightbox-nav-btn.next {
+            right: 1.25rem;
+        }
+
+        .lightbox-counter {
+            font-family: 'Inconsolata', monospace;
+            font-size: 11px;
+            color: #9ca3af;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 15;
+            user-select: none;
+        }
+
+        @media (max-width: 860px) {
+            .lightbox-modal {
+                padding: 0.5rem;
+            }
+            .lightbox-container {
+                flex-direction: column;
+                max-height: 94vh;
+                overflow-y: auto;
+                width: 100%;
+                max-width: 100%;
+            }
+            .lightbox-image-wrap {
+                max-height: 52vh;
+                padding: 0.5rem;
+            }
+            .lightbox-content {
+                max-height: 48vh;
+            }
+            .lightbox-sidebar {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                max-height: none;
+                padding: 1.25rem;
+            }
+            .lightbox-nav-btn {
+                font-size: 38px;
+                padding: 0.25rem;
+                z-index: 120;
+            }
+            .lightbox-nav-btn.prev {
+                left: 0.25rem;
+            }
+            .lightbox-nav-btn.next {
+                right: 0.25rem;
+            }
         }
     </style>
     <script src="js/script.js" defer></script>
@@ -147,21 +296,19 @@
 </head>
 <body class="text-gray-300 min-h-screen flex flex-col">
 
+    <!-- Ambient Randomized Lava Lamp Canvas -->
+    <canvas id="lava-canvas" class="lava-canvas" aria-hidden="true"></canvas>
+
     <!-- ===================== HEADER ===================== -->
     <header class="w-full sticky-header">
         <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center relative">
             <a href="index.html" class="text-xl font-bold text-white tracking-tight">ShirO<span class="slash-accent">/</span>Emha Wira</a>
 
                                     <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html#about" class="hover:text-white text-sm transition-colors w-20 text-center inline-block" data-i18n-en="About" data-i18n-id="Tentang">About</a>
-                <a href="index.html#work" class="hover:text-white text-sm transition-colors text-white font-semibold w-16 text-center inline-block" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
-                <a href="index.html#experience" class="hover:text-white text-sm transition-colors w-28 text-center inline-block" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
-                <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center justify-center gap-2 cursor-pointer select-none py-1 hover:opacity-80 transition-opacity w-14" aria-label="Toggle language">
-                    <span class="lang-en-span text-white font-bold">EN</span>
-                    <span class="text-gray-600 font-light">/</span>
-                    <span class="lang-id-span text-gray-500 font-normal hover:text-gray-300">ID</span>
-                </div>
-                <a href="index.html#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center w-[148px] shrink-0" data-i18n-en="Contact Me ↗" data-i18n-id="Hubungi Saya ↗">Contact Me ↗</a>
+                <a href="index.html#about" class="hover:text-white text-sm transition-colors">About</a>
+                <a href="index.html#work" class="hover:text-white text-sm transition-colors text-white font-semibold">Work</a>
+                <a href="index.html#experience" class="hover:text-white text-sm transition-colors">Experience</a>
+                <a href="index.html#contact" class="hover:text-white text-sm px-3 py-2 border border-gray-700 rounded-lg hover:border-gray-500 hover:bg-gray-800 transition-all inline-flex items-center justify-center">Contact Me ↗</a>
             </div>
 
             <button id="menu-toggle" class="md:hidden text-white p-1" aria-label="Open menu">
@@ -169,17 +316,10 @@
             </button>
 
             <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden">
-                <a href="index.html#about" data-i18n-en="About" data-i18n-id="Tentang">About</a>
-                <a href="index.html#work" data-i18n-en="Work" data-i18n-id="Karya">Work</a>
-                <a href="index.html#experience" data-i18n-en="Experience" data-i18n-id="Pengalaman">Experience</a>
-                <a href="index.html#contact" data-i18n-en="Contact" data-i18n-id="Kontak">Contact</a>
-                <div class="pt-3 flex justify-center">
-                    <div class="lang-toggle-btn text-xs font-mono tracking-wider flex items-center gap-2 cursor-pointer select-none py-1" aria-label="Toggle language">
-                        <span class="lang-en-span text-white font-bold">EN</span>
-                        <span class="text-gray-600 font-light">/</span>
-                        <span class="lang-id-span text-gray-500 font-normal">ID</span>
-                    </div>
-                </div>
+                <a href="index.html#about">About</a>
+                <a href="index.html#work">Work</a>
+                <a href="index.html#experience">Experience</a>
+                <a href="index.html#contact">Contact</a>
             </div>
         </nav>
     </header>
@@ -188,18 +328,18 @@
     <main class="flex-grow max-w-6xl mx-auto px-6 py-12 w-full">
         <!-- Back Navigation -->
         <div class="mb-8">
-            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-white transition-colors group" data-i18n-en="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Back to Selected Work" data-i18n-id="<span class='group-hover:-translate-x-1 transition-transform'>←</span> Kembali ke Karya Pilihan">
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-mono text-gray-400 hover:text-white transition-colors group">
                 <span class="group-hover:-translate-x-1 transition-transform">←</span> Back to Selected Work
             </a>
         </div>
 
         <!-- Section Title Banner matching zul-redesign -->
         <div class="mb-12 border-b border-gray-800 pb-8">
-            <p class="section-label mb-2" data-i18n-en="02.2 / 2D ART &amp; GRAPHIC DESIGN GALLERY" data-i18n-id="02.2 / GALERI SENI 2D &amp; DESAIN GRAFIS">02.2 / 2D ART &amp; GRAPHIC DESIGN GALLERY</p>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4" data-i18n-en="2D Art &amp; Graphic Design" data-i18n-id="Seni 2D &amp; Desain Grafis">
+            <p class="section-label mb-2">02.2 / 2D ART &amp; GRAPHIC DESIGN GALLERY</p>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
                 2D Art &amp; Graphic Design
             </h1>
-            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed" data-i18n-en="A collection of anime-style concept art, character portraits, digital drawings, posters, branding, and graphic design projects." data-i18n-id="Kumpulan seni konsep bergaya anime, potret karakter, gambar digital, poster, branding, dan proyek desain grafis.">
+            <p class="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed">
                 A collection of anime-style concept art, character portraits, digital drawings, posters, branding, and graphic design projects.
             </p>
         </div>
@@ -213,8 +353,8 @@
     <!-- ===================== FOOTER ===================== -->
     <footer>
         <div class="max-w-6xl mx-auto px-6 py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
-            <p data-i18n-en="© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved." data-i18n-id="© 2026 ShirO / Muhammad Wira Widhana. Hak Cipta Dilindungi.">© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
-            <a href="index.html#work" class="hover:text-white transition-colors flex items-center gap-1" data-i18n-en="← Back to Selected Work" data-i18n-id="← Kembali ke Karya Pilihan">
+            <p>© 2026 ShirO / Muhammad Wira Widhana. All Rights Reserved.</p>
+            <a href="index.html#work" class="hover:text-white transition-colors flex items-center gap-1">
                 ← Back to Selected Work
             </a>
         </div>
@@ -229,81 +369,351 @@
             const galleryContainer = document.querySelector('.masonry-gallery');
             if (!galleryContainer) return;
 
-            const images = [];
-            for (let i = 1; i <= 16; i++) {
-                images.push(`images/Gambar/karya-${i}.jpg`);
+            let galleryItems = [];
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
             }
 
-            images.forEach(src => {
-                const item = document.createElement('div');
-                item.className = 'masonry-item';
-                
-                const img = document.createElement('img');
-                img.src = src;
-                img.loading = 'lazy'; 
-                img.onerror = () => { item.style.display = 'none'; }; 
+            async function loadGallery() {
+                let items = [];
 
-                item.addEventListener('click', () => {
-                    openLightbox(src);
+                // 1. Try serverless API first (live Vercel environment)
+                try {
+                    const res = await fetch('/api/gallery?type=2d');
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            items = data;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('API fetch unavailable, checking static JSON:', e);
+                }
+
+                // 2. Fallback to static JSON file (works on local file:// or static hosting)
+                if (items.length === 0) {
+                    try {
+                        const res = await fetch('data/gallery-2d.json');
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (Array.isArray(data) && data.length > 0) {
+                                items = data;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('Static JSON unavailable, using hardcoded fallback:', e);
+                    }
+                }
+
+                // 3. Fallback emergency if running totally offline
+                if (items.length === 0) {
+                    items = [
+                        {
+                            title: "GFX Poster Denia Wuwa",
+                            category: "Graphic Design",
+                            image: "images/Gambar/2d-21-09-2026.jpg",
+                            software: "Affinity",
+                            description: "ダーニャ\n\nTo be honest, I didn't realise that affinity would be so challenging.\n\nI thought Affinity was similar to Adobe Illustrator or Photoshop.\n\nI'm still learning to use this tool, though. I wouldn't say it's impossible to learn, but it's tricky to get your head around\n#wutheringwaves #wuwa #wuwaedit"
+                        }
+                    ];
+                    for (let i = 1; i <= 16; i++) {
+                        const seq = String(i).padStart(2, '0');
+                        items.push({
+                            title: `2D Artwork ${seq}`,
+                            category: i % 2 === 0 ? "Character Concept" : "2D Illustration",
+                            image: `images/Gambar/2d-21-09-2026-${seq}.jpg`,
+                            software: i % 3 === 0 ? "Clip Studio Paint" : "Photoshop",
+                            description: `Digital drawing and anime-style illustration project ${seq}.`
+                        });
+                    }
+                }
+
+                galleryItems = items;
+
+                // Render gallery masonry items
+                galleryContainer.innerHTML = '';
+                galleryItems.forEach((item, index) => {
+                    let imgSrc = item.image || '';
+                    if (!imgSrc.startsWith('http') && !imgSrc.startsWith('images/') && !imgSrc.startsWith('/')) {
+                        imgSrc = 'images/Gambar/' + imgSrc;
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'masonry-item group relative';
+
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = item.title || 'Artwork';
+                    img.loading = 'lazy';
+                    img.onerror = () => { card.style.display = 'none'; };
+
+                    const overlay = document.createElement('div');
+                    overlay.className = 'absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3.5 flex flex-col justify-end pointer-events-none';
+
+                    if (item.category) {
+                        const catSpan = document.createElement('span');
+                        catSpan.className = 'text-[11px] font-mono text-blue-400 tracking-wider uppercase mb-1';
+                        catSpan.textContent = item.category;
+                        overlay.appendChild(catSpan);
+                    }
+
+                    const titleH3 = document.createElement('h3');
+                    titleH3.className = 'text-sm font-bold text-white tracking-tight leading-snug line-clamp-2';
+                    titleH3.textContent = item.title || 'Artwork';
+                    overlay.appendChild(titleH3);
+
+                    card.appendChild(img);
+                    card.appendChild(overlay);
+
+                    card.addEventListener('click', () => {
+                        openLightbox(index);
+                    });
+
+                    galleryContainer.appendChild(card);
                 });
+            }
 
-                item.appendChild(img);
-                galleryContainer.appendChild(item);
-            });
+            function openLightbox(initialIndex) {
+                const existing = document.querySelector('.lightbox-modal');
+                if (existing) existing.remove();
 
-            function openLightbox(src) {
+                let currentIndex = initialIndex;
+
                 const modal = document.createElement('div');
                 modal.className = 'lightbox-modal';
-                
-                const closeBtn = document.createElement('span');
-                closeBtn.className = 'lightbox-close';
-                closeBtn.innerHTML = '&times;';
-                
+
                 const container = document.createElement('div');
                 container.className = 'lightbox-container';
 
+                // Close button
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'lightbox-close';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.setAttribute('aria-label', 'Close modal');
+
+                // Image Wrap
+                const imgWrap = document.createElement('div');
+                imgWrap.className = 'lightbox-image-wrap';
+
+                // Counter badge (e.g. 1 / 17)
+                const counterEl = document.createElement('div');
+                counterEl.className = 'lightbox-counter';
+                imgWrap.appendChild(counterEl);
+
+                // Prev / Next Navigation Buttons (attached to modal backdrop outside the box)
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'lightbox-nav-btn prev';
+                prevBtn.innerHTML = '&#8249;';
+                prevBtn.setAttribute('aria-label', 'Previous artwork');
+
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'lightbox-nav-btn next';
+                nextBtn.innerHTML = '&#8250;';
+                nextBtn.setAttribute('aria-label', 'Next artwork');
+
+                // Main Image
                 const modalImg = document.createElement('img');
                 modalImg.className = 'lightbox-content';
-                modalImg.src = src;
+                imgWrap.appendChild(modalImg);
 
-                const caption = document.createElement('div');
-                caption.className = 'lightbox-caption';
-                const isId = (localStorage.getItem('lang') === 'id');
-                caption.textContent = isId ? 'Tekan ESC atau klik di luar gambar untuk keluar.' : 'Press ESC or click outside the image to exit.';
+                // Toggle details button on image
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'lightbox-toggle-sidebar';
+                toggleBtn.setAttribute('type', 'button');
+                toggleBtn.innerHTML = 'Hide Details';
+                imgWrap.appendChild(toggleBtn);
 
-                container.appendChild(modalImg);
-                container.appendChild(caption);
+                // Sidebar
+                const sidebar = document.createElement('div');
+                sidebar.className = 'lightbox-sidebar';
 
-                modal.appendChild(closeBtn);
+                const topSection = document.createElement('div');
+                const catBadge = document.createElement('span');
+                catBadge.className = 'inline-block px-2.5 py-1 text-xs font-mono font-medium rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 mb-3';
+                topSection.appendChild(catBadge);
+
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'text-xl md:text-2xl font-bold text-white tracking-tight leading-tight mb-2';
+                topSection.appendChild(titleEl);
+
+                const softEl = document.createElement('div');
+                softEl.className = 'text-xs font-mono text-gray-400 mb-4 flex items-center gap-1.5';
+                topSection.appendChild(softEl);
+
+                const descEl = document.createElement('div');
+                descEl.className = 'text-sm text-gray-300 font-sans leading-relaxed whitespace-pre-line border-t border-gray-800/80 pt-4 mt-2 max-h-[38vh] overflow-y-auto pr-1';
+                topSection.appendChild(descEl);
+
+                // Bottom Section
+                const bottomSection = document.createElement('div');
+                bottomSection.className = 'pt-4 border-t border-gray-800/80 flex flex-col gap-2 mt-4';
+
+                const fullResLink = document.createElement('a');
+                fullResLink.target = '_blank';
+                fullResLink.rel = 'noopener noreferrer';
+                fullResLink.className = 'text-xs font-mono text-blue-400 hover:text-blue-300 inline-flex items-center gap-1 transition-colors';
+                fullResLink.innerHTML = 'Open Full Resolution ↗';
+
+                const escHint = document.createElement('span');
+                escHint.className = 'text-[11px] font-mono text-gray-500';
+                escHint.textContent = 'ESC to exit · Click backdrop to close';
+
+                bottomSection.appendChild(fullResLink);
+                bottomSection.appendChild(escHint);
+
+                sidebar.appendChild(topSection);
+                sidebar.appendChild(bottomSection);
+
+                container.appendChild(closeBtn);
+                container.appendChild(imgWrap);
+                container.appendChild(sidebar);
+                modal.appendChild(prevBtn);
                 modal.appendChild(container);
+                modal.appendChild(nextBtn);
                 document.body.appendChild(modal);
+
+                // Function to update modal contents when moving next/prev
+                function updateView(idx) {
+                    const item = galleryItems[idx];
+                    let imgSrc = item.image || '';
+                    if (!imgSrc.startsWith('http') && !imgSrc.startsWith('images/') && !imgSrc.startsWith('/')) {
+                        imgSrc = 'images/Gambar/' + imgSrc;
+                    }
+
+                    modalImg.src = imgSrc;
+                    modalImg.alt = item.title || 'Artwork';
+                    fullResLink.href = imgSrc;
+
+                    counterEl.textContent = `${idx + 1} / ${galleryItems.length}`;
+
+                    if (item.category) {
+                        catBadge.textContent = item.category;
+                        catBadge.style.display = 'inline-block';
+                    } else {
+                        catBadge.style.display = 'none';
+                    }
+
+                    titleEl.textContent = item.title || 'Artwork';
+
+                    if (item.software) {
+                        softEl.innerHTML = `<span class="text-gray-500">Software:</span> <span class="text-gray-200 font-medium">${escapeHtml(item.software)}</span>`;
+                        softEl.style.display = 'flex';
+                    } else {
+                        softEl.style.display = 'none';
+                    }
+
+                    if (item.description) {
+                        descEl.textContent = item.description;
+                        descEl.style.display = 'block';
+                    } else {
+                        descEl.style.display = 'none';
+                    }
+                }
+
+                function goNext() {
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateView(currentIndex);
+                }
+
+                function goPrev() {
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateView(currentIndex);
+                }
+
+                updateView(currentIndex);
+
+                // Nav button clicks
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goPrev();
+                });
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    goNext();
+                });
+
+                // Touch swipe on image
+                let touchStartX = 0;
+                let touchStartY = 0;
+                imgWrap.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+
+                imgWrap.addEventListener('touchend', (e) => {
+                    const diffX = e.changedTouches[0].screenX - touchStartX;
+                    const diffY = e.changedTouches[0].screenY - touchStartY;
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                        if (diffX < 0) goNext();
+                        else goPrev();
+                    }
+                }, { passive: true });
+
+                // Mouse drag swipe on image
+                let mouseStartX = 0;
+                let isMouseDown = false;
+                imgWrap.addEventListener('mousedown', (e) => {
+                    if (e.target === toggleBtn || e.target === prevBtn || e.target === nextBtn) return;
+                    isMouseDown = true;
+                    mouseStartX = e.clientX;
+                });
+                imgWrap.addEventListener('mouseup', (e) => {
+                    if (!isMouseDown) return;
+                    isMouseDown = false;
+                    const diffX = e.clientX - mouseStartX;
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX < 0) goNext();
+                        else goPrev();
+                    }
+                });
+                imgWrap.addEventListener('mouseleave', () => { isMouseDown = false; });
+
+                // Sidebar toggle functionality
+                let isSidebarVisible = true;
+                toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    isSidebarVisible = !isSidebarVisible;
+                    if (isSidebarVisible) {
+                        sidebar.classList.remove('collapsed');
+                        toggleBtn.innerHTML = 'Hide Details';
+                    } else {
+                        sidebar.classList.add('collapsed');
+                        toggleBtn.innerHTML = 'Show Details';
+                    }
+                });
 
                 const closeModal = () => {
                     modal.classList.remove('show');
-                    window.removeEventListener('keydown', handleEsc);
+                    window.removeEventListener('keydown', handleKeyDown);
                     setTimeout(() => {
                         if (document.body.contains(modal)) {
                             document.body.removeChild(modal);
                         }
-                    }, 300);
+                    }, 250);
                 };
 
-                const handleEsc = (event) => {
-                    if (event.key === 'Escape') {
-                        closeModal();
-                    }
+                const handleKeyDown = (event) => {
+                    if (event.key === 'Escape') closeModal();
+                    else if (event.key === 'ArrowRight') goNext();
+                    else if (event.key === 'ArrowLeft') goPrev();
                 };
 
                 closeBtn.onclick = closeModal;
                 modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeModal();
-                    }
+                    if (e.target === modal) closeModal();
                 });
-                window.addEventListener('keydown', handleEsc);
+                window.addEventListener('keydown', handleKeyDown);
 
                 setTimeout(() => modal.classList.add('show'), 10);
             }
+
+            loadGallery();
         });
     </script>
 </body>
